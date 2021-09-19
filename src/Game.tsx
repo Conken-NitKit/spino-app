@@ -20,6 +20,10 @@ const Game = () =>{
     //html
     return(
         <div>
+            <div>
+                ここにはFigmaのリプ風という項目を作ってください。
+                
+            </div>
             <h1>{question}</h1>
             <input onChange={(e)=> setForm(e.target.value)}></input>
             <button onClick={()=> {result()}}>送信</button>
