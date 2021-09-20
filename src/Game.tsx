@@ -98,6 +98,7 @@ const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
+    const [missCount, setMissCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
 
     const result = () => {
@@ -105,17 +106,19 @@ const Game = () => {
             console.log("正解");
             setQuestionNum(questionNum + 1);
             setQuestion(twiiterText[questionNum + 1]);
-        } else {
+            setForm("");
+        } else { 
             console.log("不正解");
+            setMissCount(missCount + 1);          
         }
     }
-
-    //html
+            
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
+            <div>{missCount}問不正解</div>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -131,7 +134,7 @@ const Game = () => {
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
                 <div>
-                    <TextArea placeholder={"入力してください"} id="form" onChange={(e) => setForm(e.target.value)}></TextArea>
+                    <TextArea placeholder={"入力してください"} id="form" value={form} onChange={(e) => setForm(e.target.value)}></TextArea>
                 </div>
             </TweetBox>
             <Sending onClick={() => { result() }}>送信</Sending>
