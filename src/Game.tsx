@@ -11,7 +11,7 @@ const Game = () =>{
     const startTime = Date.now();
     let nowTime = 0;
 
-    nowTime = (Date.now() - startTime) / 1000
+nowTime = (Date.now() - startTime) / 1000
     //正解不正解の判定(consoleに表示)
 
     const result = () =>{
@@ -31,7 +31,7 @@ const Game = () =>{
         <div>
             <h1>{questionNum + 1}問目</h1>
             <div>
-                ここにはFigmaのリプ風という項目を作ってください。
+                ここではFigmaのリプ風という項目
             </div>
             <h1>{question}</h1>          
             <input id="form" onChange={(e)=> setForm(e.target.value)} 
