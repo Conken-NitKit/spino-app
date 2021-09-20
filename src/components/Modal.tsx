@@ -120,7 +120,9 @@ const Modal: React.FC<Props> = () => {
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
                         <CountText>〇〇回</CountText>
-                        <Button>リトライ</Button>
+                        <a href="/">
+                            <Button>リトライ</Button>
+                        </a>
                     </Box>
                     <Box>
                         <MeasuredText>タイム</MeasuredText>
