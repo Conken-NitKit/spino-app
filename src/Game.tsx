@@ -4,6 +4,10 @@ import { dummyText } from "./dummys/dummytext";
 
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 `;
 
 const Header = styled.div`
@@ -11,6 +15,9 @@ const Header = styled.div`
     width: 100vw;
     margin-bottom: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    @media screen and (max-width: 767px) {
+        margin-bottom: 20px;
+    }
 `;
 
 const QuestionNumText = styled.h1`
@@ -23,6 +30,9 @@ const QuestionNumText = styled.h1`
 const TweetBox = styled.div`
     display: flex;
     margin: 20px 0 0 40px;
+    @media screen and (max-width: 767px) {
+        margin: 10px 0 0 5px;
+    }
 `;
 
 const HumanIcon = styled.img`
@@ -42,7 +52,10 @@ const Text = styled.p`
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
     margin-left: 20px;
-    font-size: 24px;
+    font-size: 30px;
+    @media screen and (max-width: 767px) {
+    font-size: 25px;
+    }
 `;
 
 const TextArea = styled.textarea`
@@ -74,6 +87,9 @@ const Sending = styled.button`
         box-shadow: 0px 10px 10px rgba(89, 180, 200, 0.25);
         background-color: #98D2DF;
   }
+  @media screen and (max-width: 767px) {
+      margin: 20px auto;
+    }
 `;
 
 const twiiterText: string[] = dummyText;
@@ -106,8 +122,8 @@ const Game = () => {
                     <VerticalLine />
                 </div>
                 <div>
-                    <Text style={{ fontSize: "30px", color: "#5B5B5B" }}>あなたのツイート</Text>
-                    <Text>{question}</Text>
+                    <Text style={{ color: "#5B5B5B" }}>あなたのツイート</Text>
+                    <Text style={{ fontSize: "24px" }}>{question}</Text>
                 </div>
             </TweetBox >
             <TweetBox>
