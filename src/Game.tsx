@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Modal from "./components/Modal";
-import styled from "styled-components";
 import { dummyText } from "./dummys/dummytext";
+import styled from "styled-components";
+
 
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
@@ -101,6 +102,11 @@ const Game = () => {
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const startTime = Date.now();
+    let nowTime = 0;
+
+    //nowTime = (Date.now() - startTime) / 1000
+    const [missCount, setMissCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
 
     const result = () => {
@@ -108,8 +114,10 @@ const Game = () => {
             console.log("正解");
             setQuestionNum(questionNum + 1);
             setQuestion(twiiterText[questionNum + 1]);
+            setForm("");
         } else {
             console.log("不正解");
+            setMissCount(missCount + 1);
         }
 
         if (questionNum === twiiterText.length - 1) {
@@ -117,12 +125,12 @@ const Game = () => {
         }
     }
 
-    //html
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
+            <div>{missCount}問不正解</div>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -137,14 +145,24 @@ const Game = () => {
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
-                <TextArea placeholder={"入力してください"} id="form" onChange={(e) => setForm(e.target.value)} />
-            </TweetBox>
-            <Sending onClick={() => { result() }}>送信</Sending>
-            {isOpenModal && (
-                <Modal />
-            )}
+                <div>
+                    <TextArea 
+                        placeholder={"入力してください"} 
+                        id="form" 
+                        value={form} 
+                        onChange={(e) => setForm(e.target.value)} 
+                        onKeyDown={(e) => {if (e.key === 'Enter') {result()}}}
+                    ></TextArea>
+                </div>
+            </TweetBox >
+    <Sending onClick={() => { result() }}>送信</Sending>
+{
+    isOpenModal && (
+        <Modal />
+    )
+}
 
-        </Container>
+        </Container >
     );
 
 }
