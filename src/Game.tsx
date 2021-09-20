@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { dummyText } from "./dummys/dummytext";
+import styled from "styled-components";
+
 
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
@@ -98,6 +99,10 @@ const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
+    const startTime = Date.now();
+    let nowTime = 0;
+
+    //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
 
@@ -112,7 +117,7 @@ const Game = () => {
             setMissCount(missCount + 1);          
         }
     }
-            
+      
     return (
         <Container>
             <Header>
@@ -134,7 +139,13 @@ const Game = () => {
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
                 <div>
-                    <TextArea placeholder={"入力してください"} id="form" value={form} onChange={(e) => setForm(e.target.value)}></TextArea>
+                    <TextArea 
+                        placeholder={"入力してください"} 
+                        id="form" 
+                        value={form} 
+                        onChange={(e) => setForm(e.target.value)} 
+                        onKeyDown={(e) => {if (e.key === 'Enter') {result()}}}
+                    ></TextArea>
                 </div>
             </TweetBox>
             <Sending onClick={() => { result() }}>送信</Sending>
