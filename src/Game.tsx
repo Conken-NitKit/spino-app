@@ -100,6 +100,7 @@ const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     //正解不正解の判定(consoleに表示)
 
     const result = () => {
@@ -109,6 +110,10 @@ const Game = () => {
             setQuestion(twiiterText[questionNum + 1]);
         } else {
             console.log("不正解");
+        }
+
+        if (questionNum === twiiterText.length - 1) {
+            setIsOpenModal(true);
         }
     }
 
@@ -132,14 +137,16 @@ const Game = () => {
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
-                <div>
-                    <TextArea placeholder={"入力してください"} id="form" onChange={(e) => setForm(e.target.value)}></TextArea>
-                </div>
+                <TextArea placeholder={"入力してください"} id="form" onChange={(e) => setForm(e.target.value)} />
             </TweetBox>
             <Sending onClick={() => { result() }}>送信</Sending>
-            <Modal />
+            {isOpenModal && (
+                <Modal />
+            )}
+
         </Container>
     );
+
 }
 
 export default Game;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Background = styled.div`
@@ -105,8 +105,11 @@ const Button = styled.button`
     }
 `;
 
+type Props = {
 
-const Modal = () => {
+}
+
+const Modal: React.FC<Props> = () => {
     //html
     return (
         <Background>
