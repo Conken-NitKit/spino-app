@@ -18,6 +18,10 @@ const ModalBox = styled.div`
 	transform: translateY(-50%);
     background-color: white;
     box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.25);
+    @media screen and (max-width: 767px) {
+        height: 200px;
+        width: 300px;
+    }
 `;
 
 const Title = styled.h1`
@@ -30,6 +34,9 @@ const Title = styled.h1`
     line-height: 2em;
     color: white;
     background-color: #59B4C8;
+    @media screen and (max-width: 767px) {
+        font-size: 12px;
+    }
 `;
 
 const PointCallText = styled.p`
@@ -37,6 +44,10 @@ const PointCallText = styled.p`
     text-align: center;
     font-size: 20px;
     font-weight: 700;
+    @media screen and (max-width: 767px) {
+        margin-top: 22px;
+        font-size: 10px;
+    }
 `;
 
 const Container = styled.div`
@@ -53,12 +64,19 @@ const MeasuredText = styled.p`
     font-size: 16px;
     font-weight: 800;
     color: #5AA1C9;
+    @media screen and (max-width: 767px) {
+        margin: 2px auto;
+        font-size: 10px;
+    }
 `;
 
 const CountText = styled.p`
     margin: 0 auto;
     font-size: 40px;
     font-weight: 800;
+    @media screen and (max-width: 767px) {
+        font-size: 20px;
+    }
 `;
 
 const Button = styled.button`
@@ -79,6 +97,12 @@ const Button = styled.button`
         background-color: #98D2DF;
         color: white;
   }
+  @media screen and (max-width: 767px) {
+        height: 30px;
+        width: 120px;
+        margin-top: 10px;
+        font-size: 12px;
+    }
 `;
 
 
@@ -88,7 +112,7 @@ const Modal = () => {
         <Background>
             <ModalBox>
                 <Title>お疲れ様でした！</Title>
-                <PointCallText>あなたの点数は<span style={{ fontSize: "50px", color: "#0F609A", padding: "0 10px" }}>〇〇〇pt</span>です！！</PointCallText>
+                <PointCallText>あなたの点数は<span style={{ fontSize: "3em", color: "#0F609A", padding: "0 10px" }}>〇〇〇pt</span>です！！</PointCallText>
                 <Container>
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
