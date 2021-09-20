@@ -119,7 +119,6 @@ const Game = () => {
             console.log("不正解");
             setMissCount(missCount + 1);
         }
-
         if (questionNum === twiiterText.length - 1) {
             setIsOpenModal(true);
         }
@@ -146,21 +145,25 @@ const Game = () => {
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
                 <div>
-                    <TextArea 
-                        placeholder={"入力してください"} 
-                        id="form" 
-                        value={form} 
-                        onChange={(e) => setForm(e.target.value)} 
-                        onKeyDown={(e) => {if (e.key === 'Enter') {result()}}}
+                    <TextArea
+                        placeholder={"入力してください"}
+                        id="form"
+                        name="textarea"
+                        value={form}
+                        autoFocus
+                        onFocus={e => e.currentTarget.select()}
+                        onChange={(e) => setForm(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') { result() } }}
                     ></TextArea>
+
                 </div>
             </TweetBox >
-    <Sending onClick={() => { result() }}>送信</Sending>
-{
-    isOpenModal && (
-        <Modal />
-    )
-}
+            <Sending onClick={() => { result() }}>送信</Sending>
+            {
+                isOpenModal && (
+                    <Modal />
+                )
+            }
 
         </Container >
     );
