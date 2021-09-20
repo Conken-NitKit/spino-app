@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { dummyText } from "./dummys/dummytext";
 
+const Container = styled.div`
+    @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
+`;
+
 const Header = styled.div`
     height: 54px;
     width: 100vw;
@@ -10,12 +14,13 @@ const Header = styled.div`
 `;
 
 const QuestionNumText = styled.h1`
+    font-family: 'Noto Sans JP', sans-serif;
     font-weight: bold;
     color: #59B4C8;
     text-align: center;
 `;
 
-const Container = styled.div`
+const TweetBox = styled.div`
     display: flex;
     margin: 20px 0 0 40px;
 `;
@@ -34,6 +39,8 @@ const VerticalLine = styled.div`
 `;
 
 const Text = styled.p`
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
     margin-left: 20px;
     font-size: 24px;
 `;
@@ -43,6 +50,7 @@ const TextArea = styled.textarea`
     width: calc(85vw - 64px);
     background-color: #F9F9F9;
     font-size: 24px;
+    font-family: 'Noto Sans JP', sans-serif;
     margin-left: 20px;
     resize: none;
     border: none;
@@ -56,6 +64,8 @@ const Sending = styled.button`
     float: right;
     background-color: #59B4C8;
     font-size: 20px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
     color: #FFFFFF;
     border: none;
     &:hover {
@@ -86,30 +96,30 @@ const Game = () => {
 
     //html
     return (
-        <div>
+        <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
-            <Container>
+            <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                     <VerticalLine />
                 </div>
                 <div>
-                    <Text style={{ fontSize: "30px" }}>あなたのツイート</Text>
+                    <Text style={{ fontSize: "30px", color: "#5B5B5B" }}>あなたのツイート</Text>
                     <Text>{question}</Text>
                 </div>
-            </Container >
-            <Container>
+            </TweetBox >
+            <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
                 <div>
                     <TextArea placeholder={"入力してください"} id="form" onChange={(e) => setForm(e.target.value)}></TextArea>
                 </div>
-            </Container>
+            </TweetBox>
             <Sending onClick={() => { result() }}>送信</Sending>
-        </div >
+        </Container>
     );
 }
 
