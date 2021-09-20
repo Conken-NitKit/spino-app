@@ -1,0 +1,109 @@
+import React, { useState } from "react";
+import styled from "styled-components";
+
+const Background = styled.div`
+    @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
+    font-family: "Noto Sans Japanese", sans-serif;
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(89, 89, 89, 0.7);
+`;
+
+const ModalBox = styled.div`
+    height: 400px;
+    width: 600px;
+    margin: 50vh auto 0;
+	transform: translateY(-50%);
+    background-color: white;
+    box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.25);
+`;
+
+const Title = styled.h1`
+    position: relative;
+    top: 12px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 2em;
+    color: white;
+    background-color: #59B4C8;
+`;
+
+const PointCallText = styled.p`
+    margin-top: 54px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+`;
+
+const Container = styled.div`
+    display: flex;
+    justify-content: space-around;
+`;
+
+const Box = styled.div`
+    text-align: center;
+`;
+
+const MeasuredText = styled.p`
+    margin: 4px auto;
+    font-size: 16px;
+    font-weight: 800;
+    color: #5AA1C9;
+`;
+
+const CountText = styled.p`
+    margin: 0 auto;
+    font-size: 40px;
+    font-weight: 800;
+`;
+
+const Button = styled.button`
+    height: 40px;
+    width: 240px;
+    margin-top: 20px;
+    border: 2px solid #59B4C8;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #59B4C8;
+    &:hover {
+        border: 2px solid rgba(89, 180, 200, 0.7);
+        box-sizing: border-box;
+        box-shadow: 0px 10px 10px rgba(89, 180, 200, 0.25);
+        background-color: #98D2DF;
+        color: white;
+  }
+`;
+
+
+const Modal = () => {
+    //html
+    return (
+        <Background>
+            <ModalBox>
+                <Title>お疲れ様でした！</Title>
+                <PointCallText>あなたの点数は<span style={{ fontSize: "50px", color: "#0F609A", padding: "0 10px" }}>〇〇〇pt</span>です！！</PointCallText>
+                <Container>
+                    <Box>
+                        <MeasuredText>ミスした数</MeasuredText>
+                        <CountText>〇〇回</CountText>
+                        <Button>リトライ</Button>
+                    </Box>
+                    <Box>
+                        <MeasuredText>タイム</MeasuredText>
+                        <CountText>〇〇秒</CountText>
+                        <Button>twitterでつぶやく</Button>
+                    </Box>
+                </Container>
+            </ModalBox>
+        </Background>
+    );
+}
+
+export default Modal;

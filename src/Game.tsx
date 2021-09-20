@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import Modal from "./components/Modal";
 import styled from "styled-components";
 import { dummyText } from "./dummys/dummytext";
 
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
+    font-family: "Noto Sans Japanese", sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -135,6 +137,7 @@ const Game = () => {
                 </div>
             </TweetBox>
             <Sending onClick={() => { result() }}>送信</Sending>
+            <Modal />
         </Container>
     );
 }
