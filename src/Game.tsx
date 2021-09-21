@@ -1,8 +1,7 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import Modal from "./components/Modal";
 import { dummyText } from "./dummys/dummytext";
 import styled from "styled-components";
-
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
@@ -178,7 +177,7 @@ const Game = () => {
                         autoFocus
                         onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); result() } }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) { result() } }}
                     ></TextArea>
 
                 </div>
@@ -192,7 +191,7 @@ const Game = () => {
                     Skip.play();
                     if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result() }}>送信</Sending>
+                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
