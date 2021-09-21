@@ -107,15 +107,18 @@ const Button = styled.button`
 
 type Props = {
     missCount: number;
+    skipCount: number;
+    time: number;
 }
 
-const Modal: React.FC<Props> = ({ missCount }) => {
+const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
+    const point = 100 - (10 * skipCount) - (4 * missCount) - (time / 2);
     //html
     return (
         <Background>
             <ModalBox>
                 <Title>お疲れ様でした！</Title>
-                <PointCallText>あなたの点数は<span style={{ fontSize: "3em", color: "#0F609A", padding: "0 10px" }}>〇〇〇pt</span>です！！</PointCallText>
+                <PointCallText>あなたの点数は<span style={{ fontSize: "3em", color: "#0F609A", padding: "0 10px" }}>{point}pt</span>です！！</PointCallText>
                 <Container>
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
@@ -126,7 +129,7 @@ const Modal: React.FC<Props> = ({ missCount }) => {
                     </Box>
                     <Box>
                         <MeasuredText>タイム</MeasuredText>
-                        <CountText>〇〇秒</CountText>
+                        <CountText>{time}秒</CountText>
                         <Button>twitterでつぶやく</Button>
                     </Box>
                 </Container>
