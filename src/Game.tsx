@@ -73,11 +73,16 @@ const TextArea = styled.textarea`
     outline-color: #D9D9D9;
 `;
 
+const ButtonsContainer = styled.div`
+    display: flex;
+    margin-top: 40px;
+    float: right;
+`;
+
 const Sending = styled.button`
     height: 40px;
     width: 120px;
-    margin: 40px 100px 0 0;
-    float: right;
+    margin-right: 100px;
     background-color: #59B4C8;
     font-size: 20px;
     font-family: 'Noto Sans JP', sans-serif;
@@ -102,7 +107,7 @@ const Game = () => {
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    
+
     //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
@@ -128,7 +133,6 @@ const Game = () => {
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
-            <div>{missCount}問不正解</div>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -144,21 +148,25 @@ const Game = () => {
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
                 <div>
-                    <TextArea 
-                        placeholder={"入力してください"} 
-                        id="form" 
-                        value={form} 
-                        onChange={(e) => setForm(e.target.value)} 
-                        onKeyDown={(e) => {if (e.key === 'Enter') {result()}}}
+                    <TextArea
+                        placeholder={"入力してください"}
+                        id="form"
+                        value={form}
+                        onChange={(e) => setForm(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') { result() } }}
                     ></TextArea>
                 </div>
             </TweetBox >
-    <Sending onClick={() => { result() }}>送信</Sending>
-{
-    isOpenModal && (
-        <Modal />
-    )
-}
+            <ButtonsContainer>
+                <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
+                <Sending onClick={() => { setQuestionNum(questionNum + 1); if (questionNum === twiiterText.length - 1) setIsOpenModal(true) }} style={{ marginRight: "12px" }}>パス</Sending>
+                <Sending onClick={() => { result() }}>送信</Sending>
+            </ButtonsContainer>
+            {
+                isOpenModal && (
+                    <Modal />
+                )
+            }
 
         </Container >
     );
