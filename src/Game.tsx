@@ -172,8 +172,6 @@ const Game = () => {
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
-            <p>秒数: {time}</p>
-            <button onClick={handleStopButton}>ストップ</button>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
