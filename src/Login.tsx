@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 
-const Page = styled.div `
+const Page = styled.div`
     text-align: center;
     font-size: 100%;
 `;
@@ -14,7 +14,7 @@ const TitleStyle = styled.h1`
     color: #59B4C8;
 `;
 
- const ContentStyle =  styled.p`
+const ContentStyle = styled.p`
      font-family: Roboto;
      font-weight: 400;
      font-style: normal;
@@ -45,7 +45,7 @@ const StartButton = styled.button`
     background-color: #59B4C8;
 `;
 
-const Login = () =>{
+const Login = () => {
     return (
         <Page>
             <TitleStyle>
@@ -55,7 +55,7 @@ const Login = () =>{
                 twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
-            <UserName  placeholder="@" />
+            <UserName placeholder="@" />
             <StartButton>
                 ゲームを始める
             </StartButton>
