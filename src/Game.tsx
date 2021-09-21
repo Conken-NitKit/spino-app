@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import { dummyText } from "./dummys/dummytext";
 import styled from "styled-components";
@@ -127,21 +127,21 @@ const Game = () => {
             setQuestion(twiiterText[questionNum + 1]);
             setForm("");
             Success.play();
-        } 
-        if (questionNum === 10){
-            clearInterval(timer as any);
         }
         else {
             console.log("不正解");
             setMissCount(missCount + 1)
             Miss.play();
         }
+        if (questionNum === 10) {
+            clearInterval(timer as any);
+        }
     }
     const handleStopButton = () => {
         clearInterval(timer as any);
     }
     useEffect(() => {
-        if(typeof timer === "undefined") {
+        if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
@@ -191,7 +191,7 @@ const Game = () => {
                     Skip.play();
                     if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
+                <Sending onClick={() => { result() }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
