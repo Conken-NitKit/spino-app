@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Page = styled.div`
     text-align: center;
@@ -56,7 +56,10 @@ const Login = () => {
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
             <UserName placeholder="@" />
-            <StartButton>
+            <StartButton onClick={() => {
+                window.confirm("OKボタンを押したらゲームがスタートします。Shift+Enterで改行、Enterで送信ができます。");
+                window.location.href = "./Game"
+            }}>
                 ゲームを始める
             </StartButton>
         </Page>
