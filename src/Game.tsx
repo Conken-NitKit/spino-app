@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import Modal from "./components/Modal";
 import { dummyText } from "./dummys/dummytext";
 import styled from "styled-components";
 
 
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
+    font-family: "Noto Sans Japanese", sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -99,7 +101,8 @@ const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
-
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    
     //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
@@ -110,12 +113,16 @@ const Game = () => {
             setQuestionNum(questionNum + 1);
             setQuestion(twiiterText[questionNum + 1]);
             setForm("");
-        } else { 
+        } else {
             console.log("不正解");
-            setMissCount(missCount + 1);          
+            setMissCount(missCount + 1);
+        }
+
+        if (questionNum === twiiterText.length - 1) {
+            setIsOpenModal(true);
         }
     }
-      
+
     return (
         <Container>
             <Header>
@@ -145,10 +152,17 @@ const Game = () => {
                         onKeyDown={(e) => {if (e.key === 'Enter') {result()}}}
                     ></TextArea>
                 </div>
-            </TweetBox>
-            <Sending onClick={() => { result() }}>送信</Sending>
-        </Container>
+            </TweetBox >
+    <Sending onClick={() => { result() }}>送信</Sending>
+{
+    isOpenModal && (
+        <Modal />
+    )
+}
+
+        </Container >
     );
+
 }
 
 export default Game;
