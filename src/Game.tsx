@@ -107,8 +107,6 @@ const Game = () => {
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
-    //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
     const [skipCount, setSkipCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
@@ -156,10 +154,14 @@ const Game = () => {
                     <TextArea
                         placeholder={"入力してください"}
                         id="form"
+                        name="textarea"
                         value={form}
+                        autoFocus
+                        onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter') { result() } }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); result() } }}
                     ></TextArea>
+
                 </div>
             </TweetBox >
             <ButtonsContainer>
