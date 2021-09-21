@@ -110,10 +110,15 @@ const Game = () => {
 
     //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
+    const [skipCount, setSkipCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
+    var time = 0;
 
     const result = () => {
-        if (form === question) {
+        if (questionNum === twiiterText.length - 1 && form === question) {
+            setIsOpenModal(true);
+        }
+        else if (form === question) {
             console.log("正解");
             setQuestionNum(questionNum + 1);
             setQuestion(twiiterText[questionNum + 1]);
@@ -121,10 +126,6 @@ const Game = () => {
         } else {
             console.log("不正解");
             setMissCount(missCount + 1);
-        }
-
-        if (questionNum === twiiterText.length - 1) {
-            setIsOpenModal(true);
         }
     }
 
@@ -159,12 +160,17 @@ const Game = () => {
             </TweetBox >
             <ButtonsContainer>
                 <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
-                <Sending onClick={() => { setQuestionNum(questionNum + 1); if (questionNum === twiiterText.length - 1) setIsOpenModal(true) }} style={{ marginRight: "12px" }}>パス</Sending>
+                <Sending onClick={() => {
+                    setQuestionNum(questionNum + 1);
+                    setQuestion(twiiterText[questionNum + 1]);
+                    setSkipCount(skipCount + 1);
+                    if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
+                }} style={{ marginRight: "12px" }}>パス</Sending>
                 <Sending onClick={() => { result() }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
-                    <Modal />
+                    <Modal missCount={missCount} skipCount={skipCount} time={time} />
                 )
             }
 
