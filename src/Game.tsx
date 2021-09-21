@@ -73,11 +73,16 @@ const TextArea = styled.textarea`
     outline-color: #D9D9D9;
 `;
 
+const ButtonsContainer = styled.div`
+    display: flex;
+    margin-top: 40px;
+    float: right;
+`;
+
 const Sending = styled.button`
     height: 40px;
     width: 120px;
-    margin: 40px 100px 0 0;
-    float: right;
+    margin-right: 100px;
     background-color: #59B4C8;
     font-size: 20px;
     font-family: 'Noto Sans JP', sans-serif;
@@ -103,6 +108,54 @@ const Game = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const [tweets,setTweets] = useState<string[]>([]);
     const [missCount, setMissCount] = useState<number>(0);
+    const [skipCount, setSkipCount] = useState<number>(0);
+    const [time, setTime] = useState(0);
+    const [timer, setTimer] = useState<NodeJS.Timeout>()
+
+    //正解不正解の判定(consoleに表示)
+    let Success = new Audio('success.mp3');
+    let Miss = new Audio('miss.mp3');
+    let Skip = new Audio('skip.mp3');
+    let OpenModal = new Audio('openModal.mp3');
+
+    const result = () => {
+        if (questionNum === tweets.length - 1 && form === question) {
+            setIsOpenModal(true);
+            OpenModal.play();
+        }
+        else if (form === question) {
+            console.log("正解");
+            setQuestionNum(questionNum + 1);
+            setQuestion(tweets[questionNum + 1]);
+            setForm("");
+            Success.play();
+        }
+
+        if (questionNum === 10){
+            clearInterval(timer as any);
+        }
+
+        if (questionNum === tweets[questionNum].length - 1) {
+            setIsOpenModal(true);
+        }else {
+            console.log("不正解");
+            setMissCount(missCount + 1)
+            Miss.play();
+        }
+    }
+
+    const handleStopButton = () => {
+        clearInterval(timer as any);
+    }
+
+    useEffect(() => {
+        if(typeof timer === "undefined") {
+            setTimer(setInterval(() => {
+                setTime(countUp => countUp + 1);
+            }, 1000))
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
         const f = async () => {
@@ -118,28 +171,13 @@ const Game = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    const result = () => {
-        if (form === question) {
-            console.log("正解");
-            setQuestionNum(questionNum + 1);
-            setQuestion(tweets[questionNum + 1]);
-            setForm("");
-        } else {
-            console.log("不正解");
-            setMissCount(missCount + 1);
-        }
-
-        if (questionNum === tweets[questionNum].length - 1) {
-            setIsOpenModal(true);
-        }
-    }
-
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
-            <div>{missCount}問不正解</div>
+            <p>秒数: {time}</p>
+            <button onClick={handleStopButton}>ストップ</button>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -155,21 +193,35 @@ const Game = () => {
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
                 </div>
                 <div>
-                    <TextArea 
-                        placeholder={"入力してください"} 
-                        id="form" 
-                        value={form} 
-                        onChange={(e) => setForm(e.target.value)} 
-                        onKeyDown={(e) => {if (e.key === 'Enter') {result()}}}
+                    <TextArea
+                        placeholder={"入力してください"}
+                        id="form"
+                        name="textarea"
+                        value={form}
+                        autoFocus
+                        onFocus={e => e.currentTarget.select()}
+                        onChange={(e) => setForm(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) { result() } }}
                     ></TextArea>
+
                 </div>
             </TweetBox >
-    <Sending onClick={() => { result() }}>送信</Sending>
-{
-    isOpenModal && (
-        <Modal />
-    )
-}
+            <ButtonsContainer>
+                <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
+                <Sending onClick={() => {
+                    setQuestionNum(questionNum + 1);
+                    setQuestion(tweets[questionNum + 1]);
+                    setSkipCount(skipCount + 1);
+                    Skip.play();
+                    if (questionNum === tweets.length - 1) setIsOpenModal(true)
+                }} style={{ marginRight: "12px" }}>パス</Sending>
+                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
+            </ButtonsContainer>
+            {
+                isOpenModal && (
+                    <Modal missCount={missCount} skipCount={skipCount} time={time} />
+                )
+            }
 
         </Container >
     );
