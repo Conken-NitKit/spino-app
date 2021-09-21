@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
-import { dummyText } from "./dummys/dummytext";
 import styled from "styled-components";
+import { twippyApi } from "./api";
 
 
 const Container = styled.div`
@@ -95,30 +95,41 @@ const Sending = styled.button`
     }
 `;
 
-const twiiterText: string[] = dummyText;
-
+const dummyUser: string = "Friedrich_buryu"
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
-    const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
+    const [question, setQuestion] = useState<string>("");
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    
-    //nowTime = (Date.now() - startTime) / 1000
+    const [tweets,setTweets] = useState<string[]>([]);
     const [missCount, setMissCount] = useState<number>(0);
-    //正解不正解の判定(consoleに表示)
+
+    useEffect(() => {
+        const f = async () => {
+            try {
+                const fetchedTweet = await twippyApi.fetchTweets(dummyUser)
+                setTweets(fetchedTweet)
+                setQuestion(fetchedTweet[0])
+            } catch (e) {
+                console.log("error")
+            }
+        }
+        f()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     const result = () => {
         if (form === question) {
             console.log("正解");
             setQuestionNum(questionNum + 1);
-            setQuestion(twiiterText[questionNum + 1]);
+            setQuestion(tweets[questionNum + 1]);
             setForm("");
         } else {
             console.log("不正解");
             setMissCount(missCount + 1);
         }
 
-        if (questionNum === twiiterText.length - 1) {
+        if (questionNum === tweets[questionNum].length - 1) {
             setIsOpenModal(true);
         }
     }
