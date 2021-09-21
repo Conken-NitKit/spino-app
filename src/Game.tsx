@@ -106,7 +106,7 @@ const Game = () => {
     const [question, setQuestion] = useState<string>("");
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    const [tweets,setTweets] = useState<string[]>([]);
+    const [tweets, setTweets] = useState<string[]>([]);
     const [missCount, setMissCount] = useState<number>(0);
     const [skipCount, setSkipCount] = useState<number>(0);
     const [time, setTime] = useState(0);
@@ -130,17 +130,13 @@ const Game = () => {
             setForm("");
             Success.play();
         }
-
-        if (questionNum === 10){
-            clearInterval(timer as any);
-        }
-
-        if (questionNum === tweets[questionNum].length - 1) {
-            setIsOpenModal(true);
-        }else {
+        else {
             console.log("不正解");
             setMissCount(missCount + 1)
             Miss.play();
+        }
+        if (questionNum === 10) {
+            clearInterval(timer as any);
         }
     }
 
@@ -149,12 +145,12 @@ const Game = () => {
     }
 
     useEffect(() => {
-        if(typeof timer === "undefined") {
+        if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -168,16 +164,14 @@ const Game = () => {
             }
         }
         f()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
-            <p>秒数: {time}</p>
-            <button onClick={handleStopButton}>ストップ</button>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -215,7 +209,7 @@ const Game = () => {
                     Skip.play();
                     if (questionNum === tweets.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
+                <Sending onClick={() => { result() }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
