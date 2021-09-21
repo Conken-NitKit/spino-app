@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Background = styled.div`
@@ -112,15 +112,63 @@ type Props = {
 }
 
 const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
-    let point: number;
-    point = 100 - (10 * skipCount) - (4 * missCount) - (time / 2);
+    let point = 100 - (10 * skipCount) - (4 * missCount) - (time / 2);
     if (point <= 0) point = 0;
+    const evaluation = (evaluation : number) =>{
+      if(evaluation === 0){
+        return "残念！　でもあきらめちゃいけない！　君の夏休みをもう一度！"
+      }
+      else if(evaluation === 3){
+        return "3点を取るのは逆に難しい！ 開発者が好きな数です！"//イースターエッグ
+      }
+      else if(0 < evaluation  && evaluation < 3){
+        return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
+      }
+      else if(3 < evaluation  && evaluation < 11){
+        return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
+      }
+      else if(10 < evaluation  && evaluation < 21){
+        return evaluation + "点!　まだまだいけるさ！　夏休みの思い出をしっかりと振り返ろう！"
+    　}
+    　else if(20 < evaluation  && evaluation < 31){
+        return evaluation + "点！　正直コメントしずらいぞう！　来年も夏休みを楽しもう！"
+    　}
+    　else if(30 < evaluation  && evaluation < 41){
+        return evaluation + "点！　君ならもっとできる！　夏休みもそう言ってる！"
+    　}
+　 　　else if(40 < evaluation  && evaluation < 51){
+        return evaluation + "点！　もうちょっとで四捨五入したら１００点！　夏休みは終わるけど、人生はこれからさ！"
+    　}
+    　else if(50 < evaluation  && evaluation < 61){
+        return evaluation + "点！　twippyで赤点！　夏休みは満点！"
+    　}
+    　else if(60 < evaluation  && evaluation < 71){
+        return evaluation + "点！　赤点回避！　きっと、夏休みも喜んでるさ！"
+    　}
+    　 else if(70 < evaluation  && evaluation < 81){
+        return evaluation + "点！　凄い！　夏休みを十分に満喫しているぞ！"
+    　}
+      else if(80 < evaluation  && evaluation < 91){
+        return evaluation + "点！　素晴らしい！　この辺りが現実的な最高点だ！　おめでとう！"
+    　}
+    　else if(90 < evaluation  && evaluation < 100){
+        return evaluation + "点！　もう何も言うことはない！　夏休みなんかメじゃないさ！"
+    　}
+    　else if(evaluation  === 100){
+        return evaluation + "点！　ズルはいけない！　でもよくできたね！　最高！"
+    　}
+      else {
+          return "hoge"
+      }
+    } 
+
     //html
     return (
         <Background>
             <ModalBox>
                 <Title>お疲れ様でした！</Title>
                 <PointCallText>あなたの点数は<span style={{ fontSize: "3em", color: "#0F609A", padding: "0 10px" }}>{point}pt</span>です！！</PointCallText>
+                <p>{evaluation(point)}</p>
                 <Container>
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
