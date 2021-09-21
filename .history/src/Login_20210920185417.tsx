@@ -1,7 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import { reduceEachLeadingCommentRange } from "typescript";
+import styled from "styled-components"
 
-const Page = styled.div`
+const Page = styled.div `
     text-align: center;
     font-size: 100%;
 `;
@@ -9,16 +10,16 @@ const Page = styled.div`
 const TitleStyle = styled.h1`
     font-family: PT Serif;
     font-style: normal;
-    margin-top: 132px;
-    font-size: 72px;
+    margin-top: 164px;
+    font-size: 36px;
     color: #59B4C8;
 `;
 
-const ContentStyle = styled.p`
+ const ContentStyle =  styled.p`
      font-family: Roboto;
      font-weight: 400;
      font-style: normal;
-     font-size: 17px;
+     font-size: 15px;
      line-height: 28.13px;
      color: #333333;
 `;
@@ -35,7 +36,7 @@ const UserName = styled.input`
 const StartButton = styled.button`
     display: inline-block;
     margin: 0 auto;
-    margin-top: 45px;
+    margin-top: 40px;
     width: 300px;
     height: 32px;
     font-size: 18px;
@@ -45,7 +46,7 @@ const StartButton = styled.button`
     background-color: #59B4C8;
 `;
 
-const Login = () => {
+const Login = () =>{
     return (
         <Page>
             <TitleStyle>
@@ -55,11 +56,8 @@ const Login = () => {
                 twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
-            <UserName placeholder="@" />
-            <StartButton onClick={() => {
-                window.confirm("OKボタンを押したらゲームがスタートします。Shift+Enterで改行、Enterで送信ができます。");
-                window.location.href = "./Game"
-            }}>
+            <UserName type="text" value=" @" />
+            <StartButton>
                 ゲームを始める
             </StartButton>
         </Page>
