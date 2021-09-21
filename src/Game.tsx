@@ -99,8 +99,6 @@ const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
-    const startTime = Date.now();
-    let nowTime = 0;
 
     //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
