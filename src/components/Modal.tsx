@@ -106,10 +106,10 @@ const Button = styled.button`
 `;
 
 type Props = {
-
+    missCount: number;
 }
 
-const Modal: React.FC<Props> = () => {
+const Modal: React.FC<Props> = ({ missCount }) => {
     //html
     return (
         <Background>
@@ -119,7 +119,7 @@ const Modal: React.FC<Props> = () => {
                 <Container>
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
-                        <CountText>〇〇回</CountText>
+                        <CountText>{missCount}回</CountText>
                         <a href="/">
                             <Button>リトライ</Button>
                         </a>
