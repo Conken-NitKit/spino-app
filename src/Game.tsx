@@ -113,10 +113,13 @@ const Game = () => {
     var time = 0;
     let Success = new Audio('success.mp3');
     let Miss = new Audio('miss.mp3');
+    let Skip = new Audio('skip.mp3');
+    let OpenModal = new Audio('openModal.mp3');
 
     const result = () => {
         if (questionNum === twiiterText.length - 1 && form === question) {
             setIsOpenModal(true);
+            OpenModal.play();
         }
         else if (form === question) {
             console.log("正解");
@@ -170,6 +173,7 @@ const Game = () => {
                     setQuestionNum(questionNum + 1);
                     setQuestion(twiiterText[questionNum + 1]);
                     setSkipCount(skipCount + 1);
+                    Skip.play();
                     if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
                 <Sending onClick={() => { result() }}>送信</Sending>
