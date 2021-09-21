@@ -7,10 +7,6 @@ import { twippyApi } from "./api";
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 `;
 
 const Header = styled.div`
