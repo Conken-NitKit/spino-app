@@ -115,12 +115,12 @@ const Game = () => {
             setQuestionNum(questionNum + 1);
             setQuestion(twiiterText[questionNum + 1]);
             setForm("");
+            if (questionNum === twiiterText.length - 1) {
+                setIsOpenModal(true);
+            }
         } else {
             console.log("不正解");
             setMissCount(missCount + 1);
-        }
-        if (questionNum === twiiterText.length - 1) {
-            setIsOpenModal(true);
         }
     }
 
