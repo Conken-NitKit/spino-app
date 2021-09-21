@@ -113,6 +113,8 @@ const Game = () => {
     const [skipCount, setSkipCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
     var time = 0;
+    let Success = new Audio('success.mp3');
+    let Miss = new Audio('miss.mp3');
 
     const result = () => {
         if (questionNum === twiiterText.length - 1 && form === question) {
@@ -123,9 +125,11 @@ const Game = () => {
             setQuestionNum(questionNum + 1);
             setQuestion(twiiterText[questionNum + 1]);
             setForm("");
+            Success.play();
         } else {
             console.log("不正解");
             setMissCount(missCount + 1);
+            Miss.play();
         }
     }
 
