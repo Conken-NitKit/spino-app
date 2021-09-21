@@ -102,9 +102,7 @@ const Game = () => {
     const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    const startTime = Date.now();
-    let nowTime = 0;
-
+    
     //nowTime = (Date.now() - startTime) / 1000
     const [missCount, setMissCount] = useState<number>(0);
     //正解不正解の判定(consoleに表示)
