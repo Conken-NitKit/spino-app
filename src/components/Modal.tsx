@@ -113,7 +113,7 @@ type Props = {
 
 const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
     let point: number;
-    point = 100 - (10 * skipCount) - (4 * missCount) - (time / 2);
+    point = 100 - (20 * skipCount) - (8 * missCount) - (time / 2);
     if (point <= 0) point = 0;
     //html
     return (
