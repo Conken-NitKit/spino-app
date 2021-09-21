@@ -57,7 +57,17 @@ const Text = styled.p`
     margin-left: 20px;
     font-size: 30px;
     @media screen and (max-width: 767px) {
-    font-size: 25px;
+        font-size: 16px;
+    }
+`;
+
+const TweetedImage = styled.img`
+    height: 200px;
+    margin: 50px  100px 0 auto;
+    text-align: right;
+    @media screen and (max-width: 767px) {
+        height: 100px;
+        margin: 122px  20px 0 auto;
     }
 `;
 
@@ -142,6 +152,7 @@ const Game = () => {
                     <Text style={{ color: "#5B5B5B" }}>あなたのツイート</Text>
                     <Text style={{ fontSize: "24px" }}>{question}</Text>
                 </div>
+                <TweetedImage src="" />
             </TweetBox >
             <TweetBox>
                 <div>
