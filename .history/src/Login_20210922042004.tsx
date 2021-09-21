@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
 
-const Page = styled.div`
+const Page = styled.div `
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27');
     justify-content: center;
     width: auto;
@@ -18,7 +18,7 @@ const TitleStyle = styled.h1`
     color: #59B4C8;
 `;
 
-const ContentStyle = styled.p`
+ const ContentStyle =  styled.p`
      font-family: 'Roboto';
      font-weight: medium;
      font-style: normal;
@@ -26,7 +26,7 @@ const ContentStyle = styled.p`
      line-height: 28.13px;
      color: #333333;
      white-space: pre;
-     @media screen and (max-width: 767px) {
+     @media screen and (max-width: 770px) {
         font-size: 60%;
         margin-top: -10px;
      }
@@ -40,9 +40,7 @@ const UserName = styled.input`
     border: solid 1px #59B4C8;
     border-radius: 1px;
     outline-color: #59B4C8;
-    @media screen and (max-width: 767px) {
-        width: 60%;
-    }
+    @media screen and (max-width: )
     
 `
 
@@ -57,8 +55,7 @@ const StartButton = styled.button`
     border-radius: 1px;
     color: #F0F0F0;
     background-color: #59B4C8;
-    @media screen and (max-width: 767px) {
-        width: 35%;
+    @media screen and (max-width: 770px) {
         margin-top: 30px;
     }
     &:hover {
@@ -78,7 +75,7 @@ const Login = () => {
             </ContentStyle>
             <UserName placeholder="ユーザー名を入力" />
             <StartButton onClick={() => {
-                window.confirm("OKボタンを押したらゲームがスタートします。Control+Enterで改行、Enterで送信ができます。");
+                window.confirm("OKボタンを押したらゲームがスタートします。Shift+Enterで改行、Enterで送信ができます。");
                 window.location.href = "./Game"
             }}>
                 ゲームを始める

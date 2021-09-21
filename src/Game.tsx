@@ -1,7 +1,9 @@
-import React, { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
-import { dummyText } from "./dummys/dummytext";
 import styled from "styled-components";
+import { twippyApi } from "./api";
+
+
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
@@ -98,13 +100,13 @@ const Sending = styled.button`
     }
 `;
 
-const twiiterText: string[] = dummyText;
-
+const dummyUser: string = "Friedrich_buryu"
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
-    const [question, setQuestion] = useState<string>(twiiterText[questionNum]);
+    const [question, setQuestion] = useState<string>("");
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [tweets, setTweets] = useState<string[]>([]);
     const [missCount, setMissCount] = useState<number>(0);
     const [skipCount, setSkipCount] = useState<number>(0);
     const [time, setTime] = useState(0);
@@ -117,25 +119,28 @@ const Game = () => {
     let OpenModal = new Audio('openModal.mp3');
 
     const result = () => {
-        if (questionNum === twiiterText.length - 1 && form === question) {
+        if (questionNum === tweets.length - 1 && form === question) {
             setIsOpenModal(true);
             OpenModal.play();
         }
         else if (form === question) {
             console.log("正解");
             setQuestionNum(questionNum + 1);
-            setQuestion(twiiterText[questionNum + 1]);
+            setQuestion(tweets[questionNum + 1]);
             setForm("");
             Success.play();
-        } 
+        }
         else {
             console.log("不正解");
             setMissCount(missCount + 1)
             Miss.play();
         }
+        if (questionNum === 10) {
+            clearInterval(timer as any);
+        }
     }
     useEffect(() => {
-        if(typeof timer === "undefined") {
+        if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
@@ -144,12 +149,25 @@ const Game = () => {
     if (questionNum === 10)
     clearInterval(timer as any);
 
+
+    useEffect(() => {
+        const f = async () => {
+            try {
+                const fetchedTweet = await twippyApi.fetchTweets(dummyUser)
+                setTweets(fetchedTweet)
+                setQuestion(fetchedTweet[0])
+            } catch (e) {
+                console.log("error")
+            }
+        }
+        f()
+    }, [])
+
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
-            <p>秒数: {time}</p>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -182,12 +200,12 @@ const Game = () => {
                 <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
                 <Sending onClick={() => {
                     setQuestionNum(questionNum + 1);
-                    setQuestion(twiiterText[questionNum + 1]);
+                    setQuestion(tweets[questionNum + 1]);
                     setSkipCount(skipCount + 1);
                     Skip.play();
-                    if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
+                    if (questionNum === tweets.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
+                <Sending onClick={() => { result() }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
