@@ -128,17 +128,11 @@ const Game = () => {
             setForm("");
             Success.play();
         } 
-        if (questionNum === 10){
-            clearInterval(timer as any);
-        }
         else {
             console.log("不正解");
             setMissCount(missCount + 1)
             Miss.play();
         }
-    }
-    const handleStopButton = () => {
-        clearInterval(timer as any);
     }
     useEffect(() => {
         if(typeof timer === "undefined") {
@@ -147,13 +141,15 @@ const Game = () => {
             }, 1000))
         }
     })
+    if (questionNum === 10)
+    clearInterval(timer as any);
+
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
             <p>秒数: {time}</p>
-            <button onClick={handleStopButton}>ストップ</button>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
