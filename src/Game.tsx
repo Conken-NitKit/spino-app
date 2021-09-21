@@ -153,7 +153,7 @@ const Game = () => {
                         autoFocus
                         onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key == 'Enter' && !e.shiftKey) { e.preventDefault(); } else if (e.key === 'Enter') { result() } }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); result() } }}
                     ></TextArea>
 
                 </div>
