@@ -162,7 +162,7 @@ const Game = () => {
                         autoFocus
                         onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); result() } }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) { result() } }}
                     ></TextArea>
 
                 </div>
@@ -176,7 +176,7 @@ const Game = () => {
                     Skip.play();
                     if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result() }}>送信</Sending>
+                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
