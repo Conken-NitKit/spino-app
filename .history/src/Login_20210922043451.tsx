@@ -40,7 +40,7 @@ const UserName = styled.input`
     border: solid 1px #59B4C8;
     border-radius: 1px;
     outline-color: #59B4C8;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 770px) {
         width: 60%;
     }
     
@@ -57,7 +57,7 @@ const StartButton = styled.button`
     border-radius: 1px;
     color: #F0F0F0;
     background-color: #59B4C8;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 770px) {
         width: 35%;
         margin-top: 30px;
     }

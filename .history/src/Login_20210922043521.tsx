@@ -57,7 +57,7 @@ const StartButton = styled.button`
     border-radius: 1px;
     color: #F0F0F0;
     background-color: #59B4C8;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 770px) {
         width: 35%;
         margin-top: 30px;
     }

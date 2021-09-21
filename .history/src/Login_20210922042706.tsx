@@ -5,7 +5,7 @@ import "@fontsource/pt-serif"
 const Page = styled.div `
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27');
     justify-content: center;
-    width: auto;
+    width: 100%;
     text-align: center;
     font-size: 100%;
 `;
@@ -26,7 +26,7 @@ const TitleStyle = styled.h1`
      line-height: 28.13px;
      color: #333333;
      white-space: pre;
-     @media screen and (max-width: 767px) {
+     @media screen and (max-width: 770px) {
         font-size: 60%;
         margin-top: -10px;
      }
@@ -40,8 +40,8 @@ const UserName = styled.input`
     border: solid 1px #59B4C8;
     border-radius: 1px;
     outline-color: #59B4C8;
-    @media screen and (max-width: 767px) {
-        width: 60%;
+    @media screen and (max-width: 770px) {
+        width: 50%;
     }
     
 `
@@ -57,7 +57,7 @@ const StartButton = styled.button`
     border-radius: 1px;
     color: #F0F0F0;
     background-color: #59B4C8;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 770px) {
         width: 35%;
         margin-top: 30px;
     }
