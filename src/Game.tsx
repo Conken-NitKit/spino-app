@@ -52,6 +52,7 @@ const VerticalLine = styled.div`
 `;
 
 const Text = styled.p`
+    width: 75vw;
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
     margin-left: 20px;
@@ -62,13 +63,10 @@ const Text = styled.p`
 `;
 
 const TweetedImage = styled.img`
-    height: 200px;
-    margin: 50px  100px 0 auto;
-    text-align: right;
-    @media screen and (max-width: 767px) {
-        height: 100px;
-        margin: 122px  20px 0 auto;
-    }
+    max-height: 140px;
+    max-width: 220px;
+    object-fit: contain;
+    float: right;
 `;
 
 const TextArea = styled.textarea`
@@ -151,8 +149,8 @@ const Game = () => {
                 <div>
                     <Text style={{ color: "#5B5B5B" }}>あなたのツイート</Text>
                     <Text style={{ fontSize: "24px" }}>{question}</Text>
+                    <TweetedImage src="" />
                 </div>
-                <TweetedImage src="" />
             </TweetBox >
             <TweetBox>
                 <div>
