@@ -1,4 +1,4 @@
-import React from "react";
+import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
 
@@ -67,6 +67,7 @@ const StartButton = styled.button`
 `;
 
 const Login = () => {
+    const [uname, setUname] = useState("")
     return (
         <Page>
             <TitleStyle>
@@ -76,10 +77,11 @@ const Login = () => {
                 twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
-            <UserName placeholder="ユーザー名を入力" />
+            <UserName placeholder="ユーザー名を入力" onChange={(e)=> setUname(e.target.value)}/>
             <StartButton onClick={() => {
                 window.confirm("OKボタンを押したらゲームがスタートします。Control+Enterで改行、Enterで送信ができます。");
                 window.location.href = "./Game"
+                localStorage.setItem("uname",uname)
             }}>
                 ゲームを始める
             </StartButton>

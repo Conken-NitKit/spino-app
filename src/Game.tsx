@@ -100,7 +100,7 @@ const Sending = styled.button`
     }
 `;
 
-const dummyUser: string = "fukke0906"
+const dummyUser: string = localStorage.getItem("uname")!
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>("読み込み中...");
