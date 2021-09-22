@@ -7,6 +7,10 @@ import { twippyApi } from "./api";
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 `;
 
 const Header = styled.div`
@@ -115,7 +119,7 @@ const Game = () => {
     const [time, setTime] = useState(0);
     const [timer, setTimer] = useState<NodeJS.Timeout>();
 
-    const [data, setData] = useState<{name: string,icon: string, tweets: string[]}>();
+    const [data, setData] = useState<{ name: string, icon: string, tweets: string[] }>();
 
     //正解不正解の判定(consoleに表示)
     let Success = new Audio('success.mp3');
@@ -144,7 +148,7 @@ const Game = () => {
             clearInterval(timer as any);
         }
     }
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         if (typeof timer === "undefined") {
@@ -152,11 +156,11 @@ const Game = () => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     if (questionNum === 5)
-    clearInterval(timer as any);
+        clearInterval(timer as any);
 
 
     useEffect(() => {
@@ -172,8 +176,8 @@ const Game = () => {
             }
         }
         f()
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

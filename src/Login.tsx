@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
 
@@ -77,11 +77,11 @@ const Login = () => {
                 twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
-            <UserName placeholder="ユーザー名を入力" onChange={(e)=> setUname(e.target.value)}/>
+            <UserName placeholder="ユーザー名を入力" onChange={(e) => setUname(e.target.value)} />
             <StartButton onClick={() => {
-                window.confirm("OKボタンを押したらゲームがスタートします。Control+Enterで改行、Enterで送信ができます。");
+                window.confirm("OKボタンを押したらゲームがスタートします。Enterで改行、Control+Enterで送信ができます。");
                 window.location.href = "./Game"
-                localStorage.setItem("uname",uname)
+                localStorage.setItem("uname", uname)
             }}>
                 ゲームを始める
             </StartButton>
