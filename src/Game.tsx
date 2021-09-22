@@ -100,10 +100,10 @@ const Sending = styled.button`
     }
 `;
 
-const dummyUser: string = "Friedrich_buryu"
+const dummyUser: string = "fukke0906"
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
-    const [question, setQuestion] = useState<string>("");
+    const [question, setQuestion] = useState<string>("読み込み中...");
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const [tweets, setTweets] = useState<string[]>([]);
@@ -140,9 +140,9 @@ const Game = () => {
         }
     }
 
-    const handleStopButton = () => {
-        clearInterval(timer as any);
-    }
+    // const handleStopButton = () => {
+    //     clearInterval(timer as any);
+    // }
 
     useEffect(() => {
         if (typeof timer === "undefined") {
@@ -156,9 +156,9 @@ const Game = () => {
     useEffect(() => {
         const f = async () => {
             try {
-                const fetchedTweet = await twippyApi.fetchTweets(dummyUser)
-                setTweets(fetchedTweet)
-                setQuestion(fetchedTweet[0])
+                const fetchedTweet = await twippyApi.filterdTimeline(dummyUser)
+                setTweets(fetchedTweet.tweets)
+                setQuestion(fetchedTweet.tweets[0])
             } catch (e) {
                 console.log("error")
             }
