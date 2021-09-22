@@ -8,7 +8,7 @@ const twippyAxios = axios.create({
 
 export const twippyApi = {
     fetchTweets: async (name: string) => {
-        const {data} = await twippyAxios.get(`/tweets?name=${name}`)
+        const { data } = await twippyAxios.get(`/tweets?name=${name}`)
         const cameledData = camelcaseKeys(data, { deep: true })
         return cameledData
     },

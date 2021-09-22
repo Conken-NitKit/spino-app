@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import styled from "styled-components";
 
@@ -120,7 +121,7 @@ type Props = {
 }
 
 const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
-    let point = 100 - (20 * skipCount) - (8 * missCount) - (time / 2);
+    let point = 42//100 - (20 * skipCount) - (8 * missCount) - (time / 2);
     if (point <= 0) point = 0;
     const evaluation = (evaluation: number) => {
         if (evaluation === 0) {
@@ -132,34 +133,34 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
         else if (0 < evaluation && evaluation < 3) {
             return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
         }
-        else if (evaluation && evaluation < 11) {
+        else if (3 < evaluation && evaluation < 10) {
             return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
         }
-        else if (evaluation && evaluation < 21) {
+        else if (9 < evaluation && evaluation < 20) {
             return evaluation + "点!　まだまだいけるさ！　夏休みの思い出をしっかりと振り返ろう！"
         }
-        else if (evaluation && evaluation < 31) {
+        else if (19 < evaluation && evaluation < 30) {
             return evaluation + "点！　正直コメントしずらいぞう！　来年も夏休みを楽しもう！"
         }
-        else if (evaluation && evaluation < 41) {
+        else if (29 < evaluation && evaluation < 40) {
             return evaluation + "点！　君ならもっとできる！　夏休みもそう言ってる！"
         }
-        else if (evaluation && evaluation < 51) {
-            return evaluation + "点！　もうちょっとで四捨五入したら１００点！　夏休みは終わるけど、人生はこれからさ！"
+        else if (39 < evaluation && evaluation < 50) {
+            return evaluation + "点！ 夏休みは終わるけど、人生はこれからさ！"
         }
-        else if (evaluation && evaluation < 61) {
+        else if (49 < evaluation && evaluation < 60) {
             return evaluation + "点！　twippyで赤点！　夏休みは満点！"
         }
-        else if (evaluation && evaluation < 71) {
+        else if (59 < evaluation && evaluation < 70) {
             return evaluation + "点！　赤点回避！　きっと、夏休みも喜んでるさ！"
         }
-        else if (evaluation && evaluation < 81) {
+        else if (69 < evaluation && evaluation < 80) {
             return evaluation + "点！　凄い！　夏休みを十分に満喫しているぞ！"
         }
-        else if (evaluation && evaluation < 91) {
+        else if (79 < evaluation && evaluation < 90) {
             return evaluation + "点！　素晴らしい！　この辺りが現実的な最高点だ！　おめでとう！"
         }
-        else if (evaluation && evaluation < 100) {
+        else if (89 < evaluation && evaluation < 100) {
             return evaluation + "点！　もう何も言うことはない！　夏休みなんかメじゃないさ！"
         }
         else if (evaluation === 100) {
