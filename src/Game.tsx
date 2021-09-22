@@ -26,6 +26,12 @@ const QuestionNumText = styled.h1`
     text-align: center;
 `;
 
+const TimeText = styled.h4`
+    margin-right: 40px;
+    float: right;
+    color: #BC1F1F;
+`;
+
 const TweetBox = styled.div`
     display: flex;
     margin: 20px 0 0 40px;
@@ -131,24 +137,15 @@ const Game = () => {
             setMissCount(missCount + 1)
             Miss.play();
         }
-        if (questionNum === 10) {
-            clearInterval(timer as any);
-        }
     }
-
-    const handleStopButton = () => {
-        clearInterval(timer as any);
-    }
-
     useEffect(() => {
         if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
+    })
+    if (questionNum === 10) clearInterval(timer as any);
     useEffect(() => {
         const f = async () => {
             try {
@@ -160,7 +157,6 @@ const Game = () => {
             }
         }
         f()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -168,6 +164,7 @@ const Game = () => {
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
+            <TimeText>開始してから: {time}秒</TimeText>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
