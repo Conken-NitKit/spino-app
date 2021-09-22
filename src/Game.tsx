@@ -135,9 +135,6 @@ const Game = () => {
             setMissCount(missCount + 1)
             Miss.play();
         }
-        if (questionNum === 10) {
-            clearInterval(timer as any);
-        }
     }
     useEffect(() => {
         if (typeof timer === "undefined") {

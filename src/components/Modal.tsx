@@ -188,7 +188,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
                     <Box>
                         <MeasuredText>タイム</MeasuredText>
                         <CountText>{time}秒</CountText>
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-show-count="false" target="_blank" rel="noopener noreferrer">
+                        <a href="http://twitter.com/share?text=twippyで夏休みを楽しもう！&hashtags=twippy" target="_blank">
                             <Button>twitterでつぶやく</Button>
                         </a>
                         <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" />
