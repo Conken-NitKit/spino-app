@@ -184,7 +184,7 @@ const Game = () => {
             <TimeText>開始してから: {time}秒</TimeText>
             <TweetBox>
                 <div>
-                    <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
+                    <HumanIcon src={data?.icon} />
                     <VerticalLine />
                 </div>
                 <div>
@@ -194,7 +194,7 @@ const Game = () => {
             </TweetBox >
             <TweetBox>
                 <div>
-                    <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
+                    <HumanIcon src={data?.icon} />
                 </div>
                 <div>
                     <TextArea
