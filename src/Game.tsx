@@ -110,7 +110,9 @@ const Game = () => {
     const [missCount, setMissCount] = useState<number>(0);
     const [skipCount, setSkipCount] = useState<number>(0);
     const [time, setTime] = useState(0);
-    const [timer, setTimer] = useState<NodeJS.Timeout>()
+    const [timer, setTimer] = useState<NodeJS.Timeout>();
+
+    const [data, setData] = useState<{name: string,icon: string, tweets: string[]}>();
 
     //正解不正解の判定(consoleに表示)
     let Success = new Audio('success.mp3');
@@ -147,6 +149,8 @@ const Game = () => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     if (questionNum === 5)
     clearInterval(timer as any);
@@ -156,13 +160,17 @@ const Game = () => {
         const f = async () => {
             try {
                 const fetchedTweet = await twippyApi.filterdTimeline(dummyUser)
+                setData(fetchedTweet)
                 setTweets(fetchedTweet.tweets)
                 setQuestion(fetchedTweet.tweets[0])
+                console.log(data)
             } catch (e) {
                 console.log("error")
             }
         }
         f()
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
