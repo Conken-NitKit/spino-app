@@ -54,6 +54,7 @@ const VerticalLine = styled.div`
 `;
 
 const Text = styled.p`
+    width: calc(85vw - 64px);
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
     margin-left: 20px;
@@ -106,6 +107,7 @@ const dummyUser: string = "Friedrich_buryu"
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>("");
+    const [name, setName] = useState<string>("");
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const [tweets, setTweets] = useState<string[]>([]);
@@ -144,7 +146,7 @@ const Game = () => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-    },[])
+    }, [])
     if (questionNum === 5) clearInterval(timer as any);
 
 
@@ -154,6 +156,8 @@ const Game = () => {
                 const fetchedTweet = await twippyApi.fetchTweets(dummyUser)
                 setTweets(fetchedTweet)
                 setQuestion(fetchedTweet[0])
+                setName("")
+                console.log(twippyApi.fetchTweets);
             } catch (e) {
                 console.log("error")
             }
@@ -173,7 +177,7 @@ const Game = () => {
                     <VerticalLine />
                 </div>
                 <div>
-                    <Text style={{ color: "#5B5B5B" }}>あなたのツイート</Text>
+                    <Text style={{ color: "#5B5B5B" }}>{name}のツイート</Text>
                     <Text style={{ fontSize: "24px" }}>{question}</Text>
                 </div>
             </TweetBox >
