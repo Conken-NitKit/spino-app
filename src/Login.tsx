@@ -80,7 +80,7 @@ const Login = () => {
             <UserName placeholder="ユーザー名を入力" onChange={(e)=> setUname(e.target.value)}/>
             <StartButton onClick={() => {
                 window.confirm("OKボタンを押したらゲームがスタートします。Control+Enterで改行、Enterで送信ができます。");
-                window.location.href = "./Game"
+                window.location.href = "./game"
                 localStorage.setItem("uname",uname)
             }}>
                 ゲームを始める
