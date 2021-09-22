@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Modal from "./components/Modal";
 import { dummyText } from "./dummys/dummytext";
 import styled from "styled-components";
-
-
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
@@ -109,8 +107,10 @@ const Game = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     const [missCount, setMissCount] = useState<number>(0);
     const [skipCount, setSkipCount] = useState<number>(0);
+    const [time, setTime] = useState(0);
+    const [timer, setTimer] = useState<NodeJS.Timeout>()
+
     //正解不正解の判定(consoleに表示)
-    var time = 0;
     let Success = new Audio('success.mp3');
     let Miss = new Audio('miss.mp3');
     let Skip = new Audio('skip.mp3');
@@ -127,18 +127,33 @@ const Game = () => {
             setQuestion(twiiterText[questionNum + 1]);
             setForm("");
             Success.play();
-        } else {
+        } 
+        if (questionNum === 10){
+            clearInterval(timer as any);
+        }
+        else {
             console.log("不正解");
-            setMissCount(missCount + 1);
+            setMissCount(missCount + 1)
             Miss.play();
         }
     }
-
+    const handleStopButton = () => {
+        clearInterval(timer as any);
+    }
+    useEffect(() => {
+        if(typeof timer === "undefined") {
+            setTimer(setInterval(() => {
+                setTime(countUp => countUp + 1);
+            }, 1000))
+        }
+    })
     return (
         <Container>
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
+            <p>秒数: {time}</p>
+            <button onClick={handleStopButton}>ストップ</button>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
@@ -162,7 +177,7 @@ const Game = () => {
                         autoFocus
                         onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); result() } }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) { result() } }}
                     ></TextArea>
 
                 </div>
@@ -176,7 +191,7 @@ const Game = () => {
                     Skip.play();
                     if (questionNum === twiiterText.length - 1) setIsOpenModal(true)
                 }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result() }}>送信</Sending>
+                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (

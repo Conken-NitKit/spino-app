@@ -76,7 +76,7 @@ const Login = () => {
                 twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
-            <UserName placeholder="ユーザーIDを入力" />
+            <UserName placeholder="ユーザーを入力" />
             <StartButton onClick={() => {
                 window.confirm("OKボタンを押したらゲームがスタートします。Shift+Enterで改行、Enterで送信ができます。");
                 window.location.href = "./Game"
