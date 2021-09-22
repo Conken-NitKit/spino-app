@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
 
-const Page = styled.div`
+const Page = styled.div `
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27');
     justify-content: center;
     width: auto;
@@ -18,7 +18,7 @@ const TitleStyle = styled.h1`
     color: #59B4C8;
 `;
 
-const ContentStyle = styled.p`
+ const ContentStyle =  styled.p`
      font-family: 'Roboto';
      font-weight: medium;
      font-style: normal;
@@ -76,9 +76,9 @@ const Login = () => {
                 twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
                 最新のツイート１０件からタイピングゲームが生成されます。
             </ContentStyle>
-            <UserName placeholder="ユーザーIDを入力" />
+            <UserName placeholder="ユーザーを入力" />
             <StartButton onClick={() => {
-                window.confirm("OKボタンを押したらゲームがスタートします。Control+Enterで改行、Enterで送信ができます。");
+                window.confirm("OKボタンを押したらゲームがスタートします。Shift+Enterで改行、Enterで送信ができます。");
                 window.location.href = "./Game"
             }}>
                 ゲームを始める
