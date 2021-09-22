@@ -139,19 +139,16 @@ const Game = () => {
             clearInterval(timer as any);
         }
     }
-
-    const handleStopButton = () => {
-        clearInterval(timer as any);
-    }
-
     useEffect(() => {
         if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    })
+    if (questionNum === 10)
+    clearInterval(timer as any);
+
 
     useEffect(() => {
         const f = async () => {
@@ -164,7 +161,6 @@ const Game = () => {
             }
         }
         f()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
