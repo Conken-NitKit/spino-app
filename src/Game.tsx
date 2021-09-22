@@ -7,10 +7,6 @@ import { twippyApi } from "./api";
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 `;
 
 const Header = styled.div`
@@ -28,6 +24,12 @@ const QuestionNumText = styled.h1`
     font-weight: bold;
     color: #59B4C8;
     text-align: center;
+`;
+
+const TimeText = styled.h4`
+    margin-right: 40px;
+    float: right;
+    color: #BC1F1F;
 `;
 
 const TweetBox = styled.div`
@@ -142,9 +144,8 @@ const Game = () => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-    })
-    if (questionNum === 10)
-    clearInterval(timer as any);
+    },[])
+    if (questionNum === 5) clearInterval(timer as any);
 
 
     useEffect(() => {
@@ -165,6 +166,7 @@ const Game = () => {
             <Header>
                 <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
             </Header>
+            <TimeText>開始してから: {time}秒</TimeText>
             <TweetBox>
                 <div>
                     <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
