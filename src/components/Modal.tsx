@@ -128,7 +128,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
             return "残念！　でもあきらめちゃいけない！　君の夏休みをもう一度！"
         }
         else if (evaluation === 3) {
-            return "3点を取るのは逆に難しい！ 開発者が好きな数です！"//イースターエッグ
+            return "3点を取るのは逆に難しい！ 開発者が好きな数です！"
         }
         else if (0 < evaluation && evaluation < 3) {
             return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
@@ -170,7 +170,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
             return "hoge"
         }
     }
-
+    const tweetText = " Test%0A私の記録は" + point.toString() + "ポイントでした! %0Atwippyで最近のツイートを振り返ろう！%0A"
     //html
     return (
         <Background>
@@ -189,7 +189,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
                     <Box>
                         <MeasuredText>タイム</MeasuredText>
                         <CountText>{time}秒</CountText>
-                        <a href="http://twitter.com/share?text=twippyで夏休みを楽しもう！&hashtags=twippy" target="_blank">
+                        <a href={`http://twitter.com/intent/tweet?text=${tweetText}&hashtags=twippy&url=http://twitter.com`} target="_blank">
                             <Button>twitterでつぶやく</Button>
                         </a>
                         <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" />
