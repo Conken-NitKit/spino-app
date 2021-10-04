@@ -84,7 +84,7 @@ const ButtonsContainer = styled.div`
 
 const Sending = styled.button`
     height: 40px;
-    width: 120px;
+    width: 200px;
     margin-right: 100px;
     background-color: #59B4C8;
     font-size: 20px;
@@ -131,7 +131,7 @@ const Game = () => {
         else if (form === question) {
             console.log("正解");
             setQuestionNum(questionNum + 1);
-            setQuestion(tweets[questionNum + 1]);
+            setQuestion(JSON.stringify(tweets[questionNum + 1].replace(/\n/g, '')).slice(1,-1));
             setForm("");
             Success.play();
         }
@@ -140,7 +140,8 @@ const Game = () => {
             setMissCount(missCount + 1)
             Miss.play();
         }
-        if (questionNum === 10) {
+
+        if (questionNum === 5) {
             clearInterval(timer as any);
         }
     }
@@ -165,7 +166,7 @@ const Game = () => {
                 const fetchedTweet = await twippyApi.filterdTimeline(dummyUser)
                 setData(fetchedTweet)
                 setTweets(fetchedTweet.tweets)
-                setQuestion(fetchedTweet.tweets[0])
+                setQuestion(JSON.stringify(fetchedTweet.tweets[0].replace(/\n/g,'')).slice(1,-1))
                 console.log(data)
             } catch (e) {
                 console.log("error")
@@ -205,21 +206,36 @@ const Game = () => {
                         autoFocus
                         onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) { result() } }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && e.ctrlKey) {
+                                 result() 
+                            } else if(e.key === 'Enter' && e.shiftKey){
+                                setQuestionNum(questionNum + 1);
+                                setQuestion(tweets[questionNum + 1]);
+                                setSkipCount(skipCount + 1);
+                                setForm("");
+                                Skip.play();
+                                if (questionNum === tweets.length - 1) setIsOpenModal(true)
+                            }
+                        }}
                     ></TextArea>
 
                 </div>
             </TweetBox >
             <ButtonsContainer>
                 <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
-                <Sending onClick={() => {
-                    setQuestionNum(questionNum + 1);
-                    setQuestion(tweets[questionNum + 1]);
-                    setSkipCount(skipCount + 1);
-                    Skip.play();
-                    if (questionNum === tweets.length - 1) setIsOpenModal(true)
-                }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result() }}>送信</Sending>
+                <Sending 
+                    onClick={() => {
+                        setQuestionNum(questionNum + 1);
+                        setQuestion(tweets[questionNum + 1]);
+                        setSkipCount(skipCount + 1);
+                        Skip.play();
+                        if (questionNum === tweets.length - 1) setIsOpenModal(true)
+                    }} 
+                    style={{ marginRight: "12px" }}
+                    
+                    >{"パス(shift + Enter)"}</Sending>
+                <Sending onClick={() => { result() }}>{"送信(Ctr + Enter)"}</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (

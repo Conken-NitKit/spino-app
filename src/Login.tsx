@@ -14,7 +14,7 @@ const TitleStyle = styled.h1`
     font-family: 'PT Serif';
     font-style: normal;
     margin-top: 150px;
-    font-size: 600%;
+    font-size: 650%;
     color: #59B4C8;
 `;
 
@@ -23,9 +23,11 @@ const ContentStyle = styled.p`
      font-weight: medium;
      font-style: normal;
      font-size: 100%;
+     font-weight: bold;
      line-height: 28.13px;
      color: #333333;
      white-space: pre;
+     margin-bottom: 50px;
      @media screen and (max-width: 767px) {
         font-size: 60%;
         margin-top: -10px;
@@ -51,6 +53,7 @@ const StartButton = styled.button`
     display: inline-block;
     margin: 0 auto;
     margin-top: 45px;
+    font-weight: 600;
     width: 20%;
     height: 70px;
     font-size: 25px;
@@ -75,10 +78,12 @@ const Login = () => {
                 twippy
             </TitleStyle>
             <ContentStyle>
-                twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
-                最新のツイート１０件からタイピングゲームが生成されます。
+                twitterのスクリーンネームを@を含めず入力してください。（例: Hackz_team）<br />
+                最近のツイートからランダムで 5問 タイピングゲームが出題されます。<br />
+                送信は Ctrl + Enter パスは Shift + Enter でも実行できます。
             </ContentStyle>
             <UserName 
+                autoFocus
                 placeholder="ユーザー名を入力" 
                 onChange={(e)=> setUname(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey){
@@ -86,12 +91,12 @@ const Login = () => {
                     localStorage.setItem("uname",uname)}}}
                 />
             <StartButton onClick={() => {
-                // window.confirm("OKボタンを押したらゲームがスタートします。Control+Enterで改行、Enterで送信ができます。");
+                // window.confirm("OKボタンを押したらゲームがスタートします。Control+Enter");
                 window.location.href = "./game"
                 localStorage.setItem("uname",uname)
             }}
             >
-                ゲームを始める
+                {"ゲームを始める(Ctrl+Enter)"}
             </StartButton>
         </Page>
     );
