@@ -1,8 +1,12 @@
-import React from "react";
+import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
+import { twippyApi } from "./api";
+import { useSetRecoilState } from "recoil";
+import { dataState } from "./atoms";
+import { useHistory } from "react-router";
 
-const Page = styled.div `
+const Page = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27');
     justify-content: center;
     width: auto;
@@ -13,19 +17,21 @@ const Page = styled.div `
 const TitleStyle = styled.h1`
     font-family: 'PT Serif';
     font-style: normal;
-    margin-top: 132px;
-    font-size: 300%;
+    margin-top: 150px;
+    font-size: 650%;
     color: #59B4C8;
 `;
 
- const ContentStyle =  styled.p`
+const ContentStyle = styled.p`
      font-family: 'Roboto';
      font-weight: medium;
      font-style: normal;
      font-size: 100%;
+     font-weight: bold;
      line-height: 28.13px;
      color: #333333;
      white-space: pre;
+     margin-bottom: 50px;
      @media screen and (max-width: 767px) {
         font-size: 60%;
         margin-top: -10px;
@@ -34,7 +40,8 @@ const TitleStyle = styled.h1`
 
 const UserName = styled.input`
     width: 40%;
-    height: 25px;
+    height: 40px;
+    font-size: 20px;
     display: block;
     margin: 0 auto;
     border: solid 1px #59B4C8;
@@ -50,9 +57,10 @@ const StartButton = styled.button`
     display: inline-block;
     margin: 0 auto;
     margin-top: 45px;
+    font-weight: 600;
     width: 20%;
-    height: 32px;
-    font-size: 80%;
+    height: 70px;
+    font-size: 25px;
     border: none;
     border-radius: 1px;
     color: #F0F0F0;
@@ -67,21 +75,46 @@ const StartButton = styled.button`
 `;
 
 const Login = () => {
+    const [uname, setUname] = useState("")
+    const setTweetData = useSetRecoilState(dataState);
+    const history = useHistory()
+
+    const certification = async () => {
+        try {
+            const fetchedTweet = await twippyApi.filterdTimeline(uname)
+            setTweetData(fetchedTweet)
+            history.push("/game")
+        } catch (e) {
+            window.alert("ユーザーが確認できませんでした。スクリーンネームが間違っていないか再度確認してください")
+        }
+    }
+
     return (
         <Page>
             <TitleStyle>
                 twippy
             </TitleStyle>
             <ContentStyle>
-                twitterのスクリーンネームを入力してください。（例:  @Hackz_team）<br />
-                最新のツイート１０件からタイピングゲームが生成されます。
+                twitterのスクリーンネームを@を含めず入力してください。（例: Hackz_team）<br />
+                最近のツイートからランダムで 5問 タイピングゲームが出題されます。<br />
+                送信は Ctrl + Enter パスは Shift + Enter でも実行できます。
             </ContentStyle>
-            <UserName placeholder="ユーザー名を入力" />
+            <UserName 
+                autoFocus
+                placeholder="ユーザー名を入力" 
+                onChange={(e)=> setUname(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey){
+                    // localStorage.setItem("uname",uname)
+                    certification()
+                }}}
+                />
             <StartButton onClick={() => {
-                window.confirm("OKボタンを押したらゲームがスタートします。Shift+Enterで改行、Enterで送信ができます。");
-                window.location.href = "./Game"
-            }}>
-                ゲームを始める
+                // window.confirm("OKボタンを押したらゲームがスタートします。Control+Enter");
+                localStorage.setItem("uname",uname)
+                certification()
+            }}
+            >
+            {"ゲームを始める(Ctrl+Enter)"}
             </StartButton>
         </Page>
     );

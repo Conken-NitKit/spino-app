@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import styled from "styled-components";
-import { twippyApi } from "./api";
+import { useRecoilValue} from "recoil";
+import { dataState } from "./atoms";
+import { tweetsObj } from "./type";
 
 
 const Container = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 `;
 
 const Header = styled.div`
@@ -28,6 +26,13 @@ const QuestionNumText = styled.h1`
     font-weight: bold;
     color: #59B4C8;
     text-align: center;
+`;
+
+const TimeText = styled.h2`
+    font-size: 30px;
+    margin-right: 40px;
+    float: right;
+    color: #59B4C8;
 `;
 
 const TweetBox = styled.div`
@@ -52,6 +57,7 @@ const VerticalLine = styled.div`
 `;
 
 const Text = styled.p`
+    width: calc(85vw - 64px);
     font-family: 'Noto Sans JP', sans-serif;
     font-weight: 400;
     margin-left: 20px;
@@ -81,7 +87,7 @@ const ButtonsContainer = styled.div`
 
 const Sending = styled.button`
     height: 40px;
-    width: 120px;
+    width: 200px;
     margin-right: 100px;
     background-color: #59B4C8;
     font-size: 20px;
@@ -100,23 +106,24 @@ const Sending = styled.button`
     }
 `;
 
-const dummyUser: string = "Friedrich_buryu"
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
-    const [question, setQuestion] = useState<string>("");
+    const [question, setQuestion] = useState<string>("読み込み中...");
     const [form, setForm] = useState<string>("");
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    const [tweets,setTweets] = useState<string[]>([]);
+    const [tweets, setTweets] = useState<string[]>([]);
     const [missCount, setMissCount] = useState<number>(0);
     const [skipCount, setSkipCount] = useState<number>(0);
     const [time, setTime] = useState(0);
-    const [timer, setTimer] = useState<NodeJS.Timeout>()
+    const [timer, setTimer] = useState<NodeJS.Timeout>();
+    const [data, setData] = useState<{name: string,icon: string, tweets: string[]}>();
 
-    //正解不正解の判定(consoleに表示)
     let Success = new Audio('success.mp3');
     let Miss = new Audio('miss.mp3');
     let Skip = new Audio('skip.mp3');
     let OpenModal = new Audio('openModal.mp3');
+
+    const getTweetData = useRecoilValue(dataState)
 
     const result = () => {
         if (questionNum === tweets.length - 1 && form === question) {
@@ -124,73 +131,70 @@ const Game = () => {
             OpenModal.play();
         }
         else if (form === question) {
-            console.log("正解");
             setQuestionNum(questionNum + 1);
-            setQuestion(tweets[questionNum + 1]);
+            setQuestion(JSON.stringify(tweets[questionNum + 1].replace(/\n/g, '')).slice(1,-1));
             setForm("");
             Success.play();
         }
-
-        if (questionNum === 10){
-            clearInterval(timer as any);
-        }
-
-        if (questionNum === tweets[questionNum].length - 1) {
-            setIsOpenModal(true);
-        }else {
-            console.log("不正解");
+        else {
             setMissCount(missCount + 1)
             Miss.play();
         }
-    }
 
-    const handleStopButton = () => {
-        clearInterval(timer as any);
+        if (isOpenModal) {
+            clearInterval(timer as any);
+        }
     }
-
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        if(typeof timer === "undefined") {
+        if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    },[])
+    if (isOpenModal){
+    clearInterval(timer as any);
+    }
 
     useEffect(() => {
         const f = async () => {
             try {
-                const fetchedTweet = await twippyApi.fetchTweets(dummyUser)
-                setTweets(fetchedTweet)
-                setQuestion(fetchedTweet[0])
+                const fetchedTweet:tweetsObj = await getTweetData
+                setData(fetchedTweet)
+                setTweets(fetchedTweet.tweets)
+                setQuestion(JSON.stringify(fetchedTweet.tweets[0].replace(/\n/g,'')).slice(1,-1))
             } catch (e) {
                 console.log("error")
             }
         }
         f()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Container>
             <Header>
-                <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
+                <QuestionNumText>{questionNum < 4 ? questionNum + 1 : 5}問目</QuestionNumText>
             </Header>
-            <p>秒数: {time}</p>
-            <button onClick={handleStopButton}>ストップ</button>
+            <TimeText>{time}秒</TimeText>
             <TweetBox>
                 <div>
-                    <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
+                    <HumanIcon src={data?.icon} />
                     <VerticalLine />
                 </div>
                 <div>
-                    <Text style={{ color: "#5B5B5B" }}>あなたのツイート</Text>
+                    <Text style={{ color: "#5B5B5B" }}>{data?.name}のツイート</Text>
                     <Text style={{ fontSize: "24px" }}>{question}</Text>
                 </div>
             </TweetBox >
             <TweetBox>
                 <div>
-                    <HumanIcon src="https://pendelion.com/wp-content/uploads/2021/04/712e65b68b3db426ad0e5aebfddecfcb.png" />
+                    <HumanIcon src={data?.icon} />
                 </div>
                 <div>
                     <TextArea
@@ -201,21 +205,36 @@ const Game = () => {
                         autoFocus
                         onFocus={e => e.currentTarget.select()}
                         onChange={(e) => setForm(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) { result() } }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && e.ctrlKey) {
+                                 result() 
+                            } else if(e.key === 'Enter' && e.shiftKey){
+                                setQuestionNum(questionNum + 1);
+                                setQuestion(tweets[questionNum + 1]);
+                                setSkipCount(skipCount + 1);
+                                setForm("");
+                                Skip.play();
+                                if (questionNum === tweets.length - 1) setIsOpenModal(true)
+                            }
+                        }}
                     ></TextArea>
 
                 </div>
             </TweetBox >
             <ButtonsContainer>
-                <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
-                <Sending onClick={() => {
-                    setQuestionNum(questionNum + 1);
-                    setQuestion(tweets[questionNum + 1]);
-                    setSkipCount(skipCount + 1);
-                    Skip.play();
-                    if (questionNum === tweets.length - 1) setIsOpenModal(true)
-                }} style={{ marginRight: "12px" }}>パス</Sending>
-                <Sending onClick={() => { result(); Skip.play(); }}>送信</Sending>
+                <p style={{ fontSize: "30px", marginRight: "20px",marginTop: "0px",  color: "#59B4C8" }}>不正解:  {missCount}</p>
+                <Sending 
+                    onClick={() => {
+                        setQuestionNum(questionNum + 1);
+                        setQuestion(tweets[questionNum + 1]);
+                        setSkipCount(skipCount + 1);
+                        Skip.play();
+                        if (questionNum === tweets.length - 1) setIsOpenModal(true)
+                    }} 
+                    style={{ marginRight: "12px" }}
+                    
+                    >{"パス(shift + Enter)"}</Sending>
+                <Sending onClick={() => { result() }}>{"送信(Ctr + Enter)"}</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
