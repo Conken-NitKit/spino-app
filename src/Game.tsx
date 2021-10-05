@@ -153,10 +153,6 @@ const Game = () => {
             }, 1000))
         }
 
-        if (isOpenModal){
-            clearInterval(timer as any);
-        }
-
         if(!getTweetData.name && !getTweetData.icon) {
             history.push('/')
           }
@@ -175,6 +171,10 @@ const Game = () => {
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+    
+    if (isOpenModal){
+        clearInterval(timer as any);
+    }
 
     return (
         <Container>
