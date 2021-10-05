@@ -7,7 +7,6 @@ import { tweetsObj } from "./type";
 
 
 const Container = styled.div`
-    @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
 `;
 
