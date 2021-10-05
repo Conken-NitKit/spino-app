@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Background = styled.div`
-    /* @import url('https://fonts.googleapis.com/earlyaccess/notosansjp.css'); */
+    @import url('https://fonts.googleapis.com/earlyaccess/notosansjp.css');
     font-family: "Noto Sans Japanese", sans-serif;
     position: absolute;
     top: 0;
@@ -190,7 +190,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
                     <Box>
                         <MeasuredText>タイム</MeasuredText>
                         <CountText>{time}秒</CountText>
-                        <a href={`https://twitter.com/intent/tweet?text=${tweetText}&hashtags=twippy&url=http://twitter.com`} target="_blank">
+                        <a href={`https://twitter.com/intent/tweet?text=${tweetText}&hashtags=twippy&url=https://twippy.netlify.app`} target="_blank">
                             <Button>twitterでつぶやく</Button>
                         </a>
                         <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" />
