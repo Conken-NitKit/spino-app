@@ -86,7 +86,7 @@ const ButtonsContainer = styled.div`
 
 const Sending = styled.button`
     height: 40px;
-    width: 200px;
+    min-width: 200px;
     margin-right: 100px;
     background-color: #59B4C8;
     font-size: 20px;
@@ -232,8 +232,8 @@ const Game = () => {
                     }} 
                     style={{ marginRight: "12px" }}
                     
-                    >{"パス(shift + Enter)"}</Sending>
-                <Sending onClick={() => { result() }}>{"送信(Ctr + Enter)"}</Sending>
+                    >{"パス(shift+Enter)"}</Sending>
+                <Sending onClick={() => { result() }}>{"送信(Ctr+Enter)"}</Sending>
             </ButtonsContainer>
             {
                 isOpenModal && (
