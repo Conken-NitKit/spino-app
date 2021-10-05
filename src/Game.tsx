@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue} from "recoil";
 import { dataState } from "./atoms";
 import { tweetsObj } from "./type";
-
+import { useHistory } from "react-router";
 
 const Container = styled.div`
     font-family: "Noto Sans Japanese", sans-serif;
@@ -123,6 +123,7 @@ const Game = () => {
     let OpenModal = new Audio('openModal.mp3');
 
     const getTweetData = useRecoilValue(dataState)
+    const history = useHistory()
 
     const result = () => {
         if (questionNum === tweets.length - 1 && form === question) {
@@ -144,22 +145,22 @@ const Game = () => {
             clearInterval(timer as any);
         }
     }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     useEffect(() => {
         if (typeof timer === "undefined") {
             setTimer(setInterval(() => {
                 setTime(countUp => countUp + 1);
             }, 1000))
         }
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-    if (isOpenModal){
-    clearInterval(timer as any);
-    }
 
-    useEffect(() => {
+        if (isOpenModal){
+            clearInterval(timer as any);
+        }
+
+        if(!getTweetData.name && !getTweetData.icon) {
+            history.push('/')
+          }
+
         const f = async () => {
             try {
                 const fetchedTweet:tweetsObj = await getTweetData
