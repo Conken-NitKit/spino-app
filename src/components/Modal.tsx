@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Background = styled.div`
@@ -170,7 +171,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
             return "hoge"
         }
     }
-    const tweetText = " Test%0A私の記録は" + point.toString() + "ポイントでした! %0Atwippyで最近のツイートを振り返ろう！%0A"
+    const tweetText = "私の記録は" + point.toString() + "ポイントでした! %0Atwippyで最近のツイートを振り返ろう！%0A"
     //html
     return (
         <Background>
@@ -182,9 +183,9 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
                         <CountText>{missCount}回</CountText>
-                        <a href="/">
+                        <Link to="/">
                             <Button>リトライ</Button>
-                        </a>
+                        </Link>
                     </Box>
                     <Box>
                         <MeasuredText>タイム</MeasuredText>

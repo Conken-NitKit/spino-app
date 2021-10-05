@@ -1,7 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
 import { twippyApi } from "./api";
+import { useSetRecoilState } from "recoil";
+import { dataState } from "./atoms";
+import { useHistory } from "react-router";
 
 const Page = styled.div`
     @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27');
@@ -73,15 +76,14 @@ const StartButton = styled.button`
 
 const Login = () => {
     const [uname, setUname] = useState("")
+    const setTweetData = useSetRecoilState(dataState);
+    const history = useHistory()
 
     const certification = async () => {
         try {
             const fetchedTweet = await twippyApi.filterdTimeline(uname)
-            console.log(fetchedTweet)
-
-            // setData(fetchedTweet)
-            // setTweets(fetchedTweet.tweets)
-            // setQuestion(JSON.stringify(fetchedTweet.tweets[0].replace(/\n/g,'')).slice(1,-1))
+            setTweetData(fetchedTweet)
+            history.push("/game")
         } catch (e) {
             window.alert("ユーザーが確認できませんでした。スクリーンネームが間違っていないか再度確認してください")
         }
@@ -102,14 +104,12 @@ const Login = () => {
                 placeholder="ユーザー名を入力" 
                 onChange={(e)=> setUname(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey){
-                    window.location.href = "./game"
-                    localStorage.setItem("uname",uname)
+                    // localStorage.setItem("uname",uname)
                     certification()
                 }}}
                 />
             <StartButton onClick={() => {
                 // window.confirm("OKボタンを押したらゲームがスタートします。Control+Enter");
-                window.location.href = "./game"
                 localStorage.setItem("uname",uname)
                 certification()
             }}

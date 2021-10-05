@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import styled from "styled-components";
-import { twippyApi } from "./api";
+import { useRecoilValue} from "recoil";
+import { dataState } from "./atoms";
+import { tweetsObj } from "./type";
 
 
 const Container = styled.div`
@@ -26,10 +28,11 @@ const QuestionNumText = styled.h1`
     text-align: center;
 `;
 
-const TimeText = styled.h4`
+const TimeText = styled.h2`
+    font-size: 30px;
     margin-right: 40px;
     float: right;
-    color: #BC1F1F;
+    color: #59B4C8;
 `;
 
 const TweetBox = styled.div`
@@ -103,7 +106,6 @@ const Sending = styled.button`
     }
 `;
 
-const dummyUser: string = localStorage.getItem("uname")!
 const Game = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>("読み込み中...");
@@ -114,14 +116,14 @@ const Game = () => {
     const [skipCount, setSkipCount] = useState<number>(0);
     const [time, setTime] = useState(0);
     const [timer, setTimer] = useState<NodeJS.Timeout>();
-
     const [data, setData] = useState<{name: string,icon: string, tweets: string[]}>();
 
-    //正解不正解の判定(consoleに表示)
     let Success = new Audio('success.mp3');
     let Miss = new Audio('miss.mp3');
     let Skip = new Audio('skip.mp3');
     let OpenModal = new Audio('openModal.mp3');
+
+    const getTweetData = useRecoilValue(dataState)
 
     const result = () => {
         if (questionNum === tweets.length - 1 && form === question) {
@@ -129,19 +131,17 @@ const Game = () => {
             OpenModal.play();
         }
         else if (form === question) {
-            console.log("正解");
             setQuestionNum(questionNum + 1);
             setQuestion(JSON.stringify(tweets[questionNum + 1].replace(/\n/g, '')).slice(1,-1));
             setForm("");
             Success.play();
         }
         else {
-            console.log("不正解");
             setMissCount(missCount + 1)
             Miss.play();
         }
 
-        if (questionNum === 5) {
+        if (isOpenModal) {
             clearInterval(timer as any);
         }
     }
@@ -163,11 +163,10 @@ const Game = () => {
     useEffect(() => {
         const f = async () => {
             try {
-                const fetchedTweet = await twippyApi.filterdTimeline(dummyUser)
+                const fetchedTweet:tweetsObj = await getTweetData
                 setData(fetchedTweet)
                 setTweets(fetchedTweet.tweets)
                 setQuestion(JSON.stringify(fetchedTweet.tweets[0].replace(/\n/g,'')).slice(1,-1))
-                console.log(data)
             } catch (e) {
                 console.log("error")
             }
@@ -180,9 +179,9 @@ const Game = () => {
     return (
         <Container>
             <Header>
-                <QuestionNumText>{questionNum + 1}問目</QuestionNumText>
+                <QuestionNumText>{questionNum < 4 ? questionNum + 1 : 5}問目</QuestionNumText>
             </Header>
-            <TimeText>開始してから: {time}秒</TimeText>
+            <TimeText>{time}秒</TimeText>
             <TweetBox>
                 <div>
                     <HumanIcon src={data?.icon} />
@@ -223,7 +222,7 @@ const Game = () => {
                 </div>
             </TweetBox >
             <ButtonsContainer>
-                <p style={{ fontSize: "18px", marginRight: "20px", color: "#BC1F1F" }}>{missCount}問不正解</p>
+                <p style={{ fontSize: "30px", marginRight: "20px",marginTop: "0px",  color: "#59B4C8" }}>不正解:  {missCount}</p>
                 <Sending 
                     onClick={() => {
                         setQuestionNum(questionNum + 1);
