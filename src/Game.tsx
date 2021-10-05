@@ -156,9 +156,9 @@ const Game = () => {
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    if (questionNum === 5)
+    if (isOpenModal){
     clearInterval(timer as any);
-
+    }
 
     useEffect(() => {
         const f = async () => {
