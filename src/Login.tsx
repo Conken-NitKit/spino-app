@@ -7,7 +7,7 @@ import { dataState } from "./atoms";
 import { useHistory } from "react-router";
 
 const Page = styled.div`
-    @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27');
+    /* @import url('http://fonts.googleapis.com/earlyaccess/notosansjp.css%27'); */
     justify-content: center;
     width: auto;
     text-align: center;
