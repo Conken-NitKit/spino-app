@@ -3,7 +3,6 @@ import camelcaseKeys from "camelcase-keys";
 
 const twippyAxios = axios.create({
     baseURL: "https://twippy-api.azurewebsites.net/"
-    // baseURL: "https://localhost:3000"
 })
 
 export const twippyApi = {
