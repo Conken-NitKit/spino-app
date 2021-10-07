@@ -8,6 +8,10 @@ import { useHistory } from "react-router";
 
 const Container = styled.div`
     font-family: "Noto Sans Japanese", sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 `;
 
 const Header = styled.div`

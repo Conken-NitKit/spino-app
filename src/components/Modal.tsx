@@ -163,7 +163,7 @@ const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
         else if (89 < evaluation && evaluation < 100) {
             return evaluation + "点！　もう何も言うことはない！　夏休みなんかメじゃないさ！"
         }
-        else if (evaluation === 100) {
+        else if (evaluation >= 100) {
             return evaluation + "点！　ズルはいけない！　でもよくできたね！　最高！"
         }
         else {
