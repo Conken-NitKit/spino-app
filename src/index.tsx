@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import {Route, BrowserRouter} from "react-router-dom";
 import Game from './Game';
-import Login from './Login';
+import Home from './Home';
 import { RecoilRoot } from 'recoil';
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <BrowserRouter>        
-        <Route exact path="/" component={Login}/>
+      <BrowserRouter>
+        <Route exact path="/" component={Home}/>
         <Route exact path="/game" component={Game}/>
       </BrowserRouter>
     </RecoilRoot>

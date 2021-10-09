@@ -2,9 +2,11 @@ import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
 import { twippyApi } from "./api";
-import { useSetRecoilState } from "recoil";
-import { dataState } from "./atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { dataState, themeState } from "./atoms";
 import { useHistory } from "react-router";
+import { Themes } from "./functions/theme";
+import { Wrapper } from "./components/Wrapper";
 
 const Page = styled.div`
     justify-content: center;
@@ -73,10 +75,13 @@ const StartButton = styled.button`
     }
 `;
 
-const Login = () => {
+const Home = () => {
     const [uname, setUname] = useState("")
     const setTweetData = useSetRecoilState(dataState);
+    const setTheme = useSetRecoilState(themeState)
     const history = useHistory()
+
+    const useTheme = useRecoilState(themeState)
 
     const certification = async () => {
         try {
@@ -89,7 +94,14 @@ const Login = () => {
     }
 
     return (
-        <Page>
+        <Wrapper>
+            <Page>
+            <button onClick={() => {
+                setTheme(Themes.light ? Themes.dark : Themes.light)
+            }}></button>
+            <button onClick={() => {
+                console.log(useTheme)
+            }}></button>
             <TitleStyle>
                 twippy
             </TitleStyle>
@@ -116,7 +128,8 @@ const Login = () => {
             {"ゲームを始める(Ctrl+Enter)"}
             </StartButton>
         </Page>
+        </Wrapper>
     );
 }
 
-export default Login;
+export default Home;

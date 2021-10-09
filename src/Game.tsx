@@ -5,6 +5,7 @@ import { useRecoilValue} from "recoil";
 import { dataState } from "./atoms";
 import { tweetsObj } from "./type";
 import { useHistory } from "react-router";
+import { Wrapper } from "./components/Wrapper";
 
 const Container = styled.div`
     font-family: "Noto Sans Japanese", sans-serif;
@@ -181,7 +182,8 @@ const Game = () => {
     }
 
     return (
-        <Container>
+        <Wrapper>
+            <Container>
             <Header>
                 <QuestionNumText>{questionNum < 4 ? questionNum + 1 : 5}問目</QuestionNumText>
             </Header>
@@ -247,6 +249,7 @@ const Game = () => {
             }
 
         </Container >
+        </Wrapper>
     );
 
 }
