@@ -120,54 +120,74 @@ type Props = {
     time: number;
 }
 
+const Point = (missCount: number, skipCount: number, time: number) => {
+    let score = 0;
+    if(skipCount >= 3) {
+     skipCount = skipCount * 3;
+    }
+    if(missCount <= 3) {
+     missCount = missCount / 2;
+    }
+    if(missCount === 0) {
+        score = score + 500;
+    }
+    if(time < 50) {
+        score = score + 500;
+    }
+    if(time > 70) {
+        score = score - 100 * (time - 70);
+    }
+    return Math.floor(5000 - (400 * skipCount) - ( 300 * missCount) - (time) + score);
+}
 const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
-    let point = Math.floor(100 - (20 * skipCount) - (8 * missCount) - (time / 2));
+    let point = Point(missCount, skipCount, time);
     if (point <= 0) point = 0;
     const evaluation = (evaluation: number) => {
-        if (evaluation === 0) {
-            return "残念！　でもあきらめちゃいけない！　君の夏休みをもう一度！"
-        }
-        else if (evaluation === 3) {
-            return "3点を取るのは逆に難しい！ 開発者が好きな数です！"
-        }
-        else if (0 < evaluation && evaluation < 3) {
-            return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
-        }
-        else if (3 < evaluation && evaluation < 10) {
-            return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
-        }
-        else if (9 < evaluation && evaluation < 20) {
-            return evaluation + "点!　まだまだいけるさ！　夏休みの思い出をしっかりと振り返ろう！"
-        }
-        else if (19 < evaluation && evaluation < 30) {
-            return evaluation + "点！　正直コメントしずらいぞう！　来年も夏休みを楽しもう！"
-        }
-        else if (29 < evaluation && evaluation < 40) {
-            return evaluation + "点！　君ならもっとできる！　夏休みもそう言ってる！"
-        }
-        else if (39 < evaluation && evaluation < 50) {
-            return evaluation + "点！ 夏休みは終わるけど、人生はこれからさ！"
-        }
-        else if (49 < evaluation && evaluation < 60) {
-            return evaluation + "点！　twippyで赤点！　夏休みは満点！"
-        }
-        else if (59 < evaluation && evaluation < 70) {
-            return evaluation + "点！　赤点回避！　きっと、夏休みも喜んでるさ！"
-        }
-        else if (69 < evaluation && evaluation < 80) {
-            return evaluation + "点！　凄い！　夏休みを十分に満喫しているぞ！"
-        }
-        else if (79 < evaluation && evaluation < 90) {
-            return evaluation + "点！　素晴らしい！　この辺りが現実的な最高点だ！　おめでとう！"
-        }
-        else if (89 < evaluation && evaluation < 100) {
-            return evaluation + "点！　もう何も言うことはない！　夏休みなんかメじゃないさ！"
-        }
-        else if (evaluation >= 100) {
-            return evaluation + "点！　ズルはいけない！　でもよくできたね！　最高！"
-        }
-        else {
-            return "hoge"
+        switch (true) {
+            case evaluation === 0:
+                return "残念！　でもあきらめちゃいけない！　君の夏休みをもう一度！"
+                break;
+            case evaluation === 3:
+                return "3点を取るのは逆に難しい！ 開発者が好きな数です！"
+                break;
+            case 0 < evaluation && evaluation < 3:
+                return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
+                break;
+            case 3 < evaluation && evaluation < 10:
+                return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
+                break;
+            case 9 < evaluation && evaluation < 20:
+                return evaluation + "点!　まだまだいけるさ！　夏休みの思い出をしっかりと振り返ろう！"
+                break;
+            case 19 < evaluation && evaluation < 30:
+                return evaluation + "点！　正直コメントしずらいぞう！　来年も夏休みを楽しもう！"
+                break;
+            case 29 < evaluation && evaluation < 40:
+                return evaluation + "点！　君ならもっとできる！　夏休みもそう言ってる！"
+                break;
+            case 39 < evaluation && evaluation < 50:
+                return evaluation + "点！ 夏休みは終わるけど、人生はこれからさ！"
+                break;
+            case 49 < evaluation && evaluation < 60:
+                return evaluation + "点！　twippyで赤点！　夏休みは満点！"
+                break;
+            case 59 < evaluation && evaluation < 70:
+                return evaluation + "点！　赤点回避！　きっと、夏休みも喜んでるさ！"
+                break;
+            case 69 < evaluation && evaluation < 80:
+                return evaluation + "点！　凄い！　夏休みを十分に満喫しているぞ！"
+                break;
+            case 79 < evaluation && evaluation < 90:
+                return evaluation + "点！　素晴らしい！　この辺りが現実的な最高点だ！　おめでとう！"
+                break;
+            case 89 < evaluation && evaluation < 100:
+                return evaluation + "点！　もう何も言うことはない！　夏休みなんかメじゃないさ！"
+                break;
+            case evaluation >= 100:
+                return evaluation + "点！　ズルはいけない！　でもよくできたね！　最高！"
+            default:
+                return "hoge"
+                break;
         }
     }
     const tweetText = "私の記録は" + point.toString() + "ポイントでした! %0Atwippyで最近のツイートを振り返ろう！%0A"
