@@ -3,7 +3,7 @@ import Modal from "../components/Modal";
 import styled from "styled-components";
 import { useRecoilValue} from "recoil";
 import { dataState } from "../grobalStates/atoms";
-import { tweetsObj } from "../type";
+import { tweetsObj } from "../types";
 import { useHistory } from "react-router";
 
 const Container = styled.div`
@@ -109,7 +109,7 @@ const Sending = styled.button`
     }
 `;
 
-const Game = () => {
+const Game:React.VFC = () => {
     const [questionNum, setQuestionNum] = useState<number>(0);
     const [question, setQuestion] = useState<string>("読み込み中...");
     const [form, setForm] = useState<string>("");
@@ -119,12 +119,12 @@ const Game = () => {
     const [skipCount, setSkipCount] = useState<number>(0);
     const [time, setTime] = useState(0);
     const [timer, setTimer] = useState<NodeJS.Timeout>();
-    const [data, setData] = useState<{name: string,icon: string, tweets: string[]}>();
+    const [data, setData] = useState<tweetsObj>();
 
-    let Success = new Audio('success.mp3');
-    let Miss = new Audio('miss.mp3');
-    let Skip = new Audio('skip.mp3');
-    let OpenModal = new Audio('openModal.mp3');
+    const Success = new Audio('success.mp3');
+    const Miss = new Audio('miss.mp3');
+    const Skip = new Audio('skip.mp3');
+    const OpenModal = new Audio('openModal.mp3');
 
     const getTweetData = useRecoilValue(dataState)
     const history = useHistory()

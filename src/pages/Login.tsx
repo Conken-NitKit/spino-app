@@ -73,7 +73,7 @@ const StartButton = styled.button`
     }
 `;
 
-const Login = () => {
+const Login:React.VFC = () => {
     const [uname, setUname] = useState("")
     const setTweetData = useSetRecoilState(dataState);
     const history = useHistory()
@@ -94,7 +94,7 @@ const Login = () => {
                 twippy
             </TitleStyle>
             <ContentStyle>
-                twitterのスクリーンネームを@を含めず入力してください。（例: Hackz_team）<br />
+                twitterのスクリーンネームを入力してください。（例: @Hackz_team）<br />
                 最近のツイートからランダムで 5問 タイピングゲームが出題されます。<br />
                 送信は Ctrl + Enter パスは Shift + Enter でも実行できます。
             </ContentStyle>
