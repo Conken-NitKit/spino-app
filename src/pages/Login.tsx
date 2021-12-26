@@ -103,12 +103,10 @@ const Login:React.VFC = () => {
                 placeholder="ユーザー名を入力" 
                 onChange={(e)=> setUname(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey){
-                    // localStorage.setItem("uname",uname)
                     certification()
                 }}}
                 />
             <StartButton onClick={() => {
-                // window.confirm("OKボタンを押したらゲームがスタートします。Control+Enter");
                 localStorage.setItem("uname",uname)
                 certification()
             }}
