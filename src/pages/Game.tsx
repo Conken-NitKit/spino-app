@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import Modal from "./components/Modal";
+import Modal from "../components/Modal";
 import styled from "styled-components";
 import { useRecoilValue} from "recoil";
-import { dataState } from "./atoms";
-import { tweetsObj } from "./type";
+import { dataState } from "../grobalStates/atoms";
+import { tweetsObj } from "../type";
 import { useHistory } from "react-router";
 
 const Container = styled.div`
