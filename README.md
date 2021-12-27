@@ -1,16 +1,15 @@
-# twippy （フロント）
+# [Twippy](https://twippy.netlify.app/)
 ## ハックツハッカソンスピノカップ
-
-### gitの使い方
-#### clone (自分のPCで使えるようにする) 方法
-1. コマンドライン(wslなど)上の,今回のフォルダをclone(コピー)したい場所までディレクトリを移動してください(ls cd 等を使う)。
-2. コマンドラインに ``` git clone https://github.com/Conken-NitKit/spino-app.git ``` と打ってください
-3. gitのパスワードを打ってください（打った内容は表示されない）
-4. ``` cd spino-app ``` でディレクトリを移動してください
-
-#### branchの使い方
-gitではいろいろな人が書いている作業中のコードが混ざって不具合が起きることを防ぐために __branch （ブランチ）__ という専用の作業スペースを作って作業します。___必ず自分のブランチに移動してから作業をしてください。___ しないとコンフリクトという大事故がおきまくります。
-
-1. ``` git branch``` と打って, 現在いるブランチを確認してください（初期ではdevelopというブランチにいます）
-2. ``` git branch 自分のブランチの名前 ``` と打って, 自分のブランチを作ります。この時の __ブランチの名前___ には ``` feature/issue-[番号] ``` として現在自分が作業しているissue(担当作業)の番号を当てはめたものを打ってください
-3. ``` git checkout 移動するブランチの名前 ``` と打って,作ったブランチに移動してください
+### Description
+過去ツイートをタイピングして夏休みを振り返ろう
+> 『ハックツハッカソン/スピノ杯』に提出する作品として開発．テーマは『夏休み最終日にだけ使うアプリ』
+### Built With
+- React
+- TypeScript
+- Styled-components
+- twitter api(backend)
+- Express (backend)
+### Links
+- [**Twippy**](https://twippy.netlify.app/)
+- [**Twippy | Topa'z (メディア)**](https://topaz.dev/projects/ce61e49288c90ca4855d)
+- [**Hack'z Event| ハックツハッカソン~スピノカップ~開催!!!**](https://hackz.team/news/5Pq3BX9JLuz6pb6gJ76Zv8)
