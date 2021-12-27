@@ -1,5 +1,5 @@
 import React from "react"
-import HomePageComponent from "../components/domain/HomePageComponent"
+import HomePageComponent from "../components/tenplate/HomePageComponent"
 
 const Home:React.VFC = () => {
     return(

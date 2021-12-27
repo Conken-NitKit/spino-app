@@ -1,7 +1,7 @@
 import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
-import { twippyApi } from "../../apis/api";
+import { twippyApi } from "../../apis/twippyApi";
 import { useSetRecoilState } from "recoil";
 import { dataState } from "../../grobalStates/atoms";
 import { useHistory } from "react-router";

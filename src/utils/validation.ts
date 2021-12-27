@@ -1,6 +1,6 @@
 export const validation = (evaluation: number) => {
 
-    if (evaluation === 0) {
+if (evaluation === 0) {
       return "残念！　でもあきらめちゃいけない！　君の夏休みをもう一度！"
   }
   else if (evaluation === 3) {

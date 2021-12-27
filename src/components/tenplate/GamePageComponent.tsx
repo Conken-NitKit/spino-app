@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Modal from "../atoms/Modal"
+import Modal from "../shared/Modal"
 import styled from "styled-components";
 import { useRecoilValue} from "recoil";
 import { dataState } from "../../grobalStates/atoms";
