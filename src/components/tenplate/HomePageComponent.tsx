@@ -1,9 +1,9 @@
 import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
-import { twippyApi } from "./api";
+import { twippyApi } from "../../apis/twippyApi";
 import { useSetRecoilState } from "recoil";
-import { dataState } from "./atoms";
+import { dataState } from "../../grobalStates/atoms";
 import { useHistory } from "react-router";
 
 const Page = styled.div`
@@ -73,7 +73,7 @@ const StartButton = styled.button`
     }
 `;
 
-const Login = () => {
+const HomePageComponent:React.VFC = () => {
     const [uname, setUname] = useState("")
     const setTweetData = useSetRecoilState(dataState);
     const history = useHistory()
@@ -94,7 +94,7 @@ const Login = () => {
                 twippy
             </TitleStyle>
             <ContentStyle>
-                twitterのスクリーンネームを@を含めず入力してください。（例: Hackz_team）<br />
+                twitterのスクリーンネームを入力してください。（例: @Hackz_team）<br />
                 最近のツイートからランダムで 5問 タイピングゲームが出題されます。<br />
                 送信は Ctrl + Enter パスは Shift + Enter でも実行できます。
             </ContentStyle>
@@ -103,12 +103,10 @@ const Login = () => {
                 placeholder="ユーザー名を入力" 
                 onChange={(e)=> setUname(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey){
-                    // localStorage.setItem("uname",uname)
                     certification()
                 }}}
                 />
             <StartButton onClick={() => {
-                // window.confirm("OKボタンを押したらゲームがスタートします。Control+Enter");
                 localStorage.setItem("uname",uname)
                 certification()
             }}
@@ -119,4 +117,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default HomePageComponent;

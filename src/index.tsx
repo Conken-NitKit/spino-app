@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import {Route, BrowserRouter} from "react-router-dom";
-import Game from './Game';
-import Login from './Login';
+import Game from './pages/Game';
+import Login from './pages/Home';
 import { RecoilRoot } from 'recoil';
 
 ReactDOM.render(
