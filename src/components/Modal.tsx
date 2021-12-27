@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { validation } from "../utils/validation";
 
 const Background = styled.div`
     font-family: "Noto Sans Japanese", sans-serif;
@@ -120,64 +121,18 @@ type Props = {
     time: number;
 }
 
+
 const Modal: React.FC<Props> = ({ missCount, skipCount, time }) => {
     let point = Math.floor(100 - (20 * skipCount) - (8 * missCount) - (time / 2));
     if (point <= 0) point = 0;
-    const evaluation = (evaluation: number) => {
-        if (evaluation === 0) {
-            return "残念！　でもあきらめちゃいけない！　君の夏休みをもう一度！"
-        }
-        else if (evaluation === 3) {
-            return "3点を取るのは逆に難しい！ 開発者が好きな数です！"
-        }
-        else if (0 < evaluation && evaluation < 3) {
-            return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
-        }
-        else if (3 < evaluation && evaluation < 10) {
-            return evaluation + "点を取るのは逆に難しい！　もう一度夏休みを復習しよう！"
-        }
-        else if (9 < evaluation && evaluation < 20) {
-            return evaluation + "点!　まだまだいけるさ！　夏休みの思い出をしっかりと振り返ろう！"
-        }
-        else if (19 < evaluation && evaluation < 30) {
-            return evaluation + "点！　正直コメントしずらいぞう！　来年も夏休みを楽しもう！"
-        }
-        else if (29 < evaluation && evaluation < 40) {
-            return evaluation + "点！　君ならもっとできる！　夏休みもそう言ってる！"
-        }
-        else if (39 < evaluation && evaluation < 50) {
-            return evaluation + "点！ 夏休みは終わるけど、人生はこれからさ！"
-        }
-        else if (49 < evaluation && evaluation < 60) {
-            return evaluation + "点！　twippyで赤点！　夏休みは満点！"
-        }
-        else if (59 < evaluation && evaluation < 70) {
-            return evaluation + "点！　赤点回避！　きっと、夏休みも喜んでるさ！"
-        }
-        else if (69 < evaluation && evaluation < 80) {
-            return evaluation + "点！　凄い！　夏休みを十分に満喫しているぞ！"
-        }
-        else if (79 < evaluation && evaluation < 90) {
-            return evaluation + "点！　素晴らしい！　この辺りが現実的な最高点だ！　おめでとう！"
-        }
-        else if (89 < evaluation && evaluation < 100) {
-            return evaluation + "点！　もう何も言うことはない！　夏休みなんかメじゃないさ！"
-        }
-        else if (evaluation >= 100) {
-            return evaluation + "点！　ズルはいけない！　でもよくできたね！　最高！"
-        }
-        else {
-            return "hoge"
-        }
-    }
+    
     const tweetText = "私の記録は" + point.toString() + "ポイントでした! %0Atwippyで最近のツイートを振り返ろう！%0A"
-    //html
     return (
         <Background>
             <ModalBox>
                 <Title>お疲れ様でした！</Title>
                 <PointCallText>あなたの点数は<span style={{ fontSize: "3em", color: "#0F609A", padding: "0 10px" }}>{point}pt</span>です！！</PointCallText>
-                <Comment>{evaluation(point)}</Comment>
+                <Comment>{validation(point)}</Comment>
                 <Container>
                     <Box>
                         <MeasuredText>ミスした数</MeasuredText>
