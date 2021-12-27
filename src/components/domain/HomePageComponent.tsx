@@ -1,9 +1,9 @@
 import {useState} from "react";
 import styled from "styled-components"
 import "@fontsource/pt-serif"
-import { twippyApi } from "../apis/api";
+import { twippyApi } from "../../apis/api";
 import { useSetRecoilState } from "recoil";
-import { dataState } from "../grobalStates/atoms";
+import { dataState } from "../../grobalStates/atoms";
 import { useHistory } from "react-router";
 
 const Page = styled.div`
@@ -73,7 +73,7 @@ const StartButton = styled.button`
     }
 `;
 
-const Login:React.VFC = () => {
+const HomePageComponent:React.VFC = () => {
     const [uname, setUname] = useState("")
     const setTweetData = useSetRecoilState(dataState);
     const history = useHistory()
@@ -117,4 +117,4 @@ const Login:React.VFC = () => {
     );
 }
 
-export default Login;
+export default HomePageComponent;

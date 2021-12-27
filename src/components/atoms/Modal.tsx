@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { validation } from "../utils/validation";
+import { validation } from "../../utils/validation";
 
 const Background = styled.div`
     font-family: "Noto Sans Japanese", sans-serif;
