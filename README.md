@@ -13,4 +13,4 @@
 ## Links
 - [**Twippy**](https://twippy.netlify.app/)
 - [**Twippy | Topa'z (メディア)**](https://topaz.dev/projects/ce61e49288c90ca4855d)
-- [**Hack'z Event| ハックツハッカソン~スピノカップ~開催!!!**](https://hackz.team/news/5Pq3BX9JLuz6pb6gJ76Zv8)
+- [**Hack'z Event| ハックツハッカソン スピノカップ開催 !!!**](https://hackz.team/news/5Pq3BX9JLuz6pb6gJ76Zv8)
