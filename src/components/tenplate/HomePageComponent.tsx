@@ -74,7 +74,12 @@ const StartButton = styled.button`
 `;
 
 const HomePageComponent:React.VFC = () => {
-    const [uname, setUname] = useState("")
+    const url = new URL(window.location.href)
+    const params = url.searchParams
+    const userNameParam = params.get("user")
+
+    const [uname, setUname] = useState(userNameParam ? userNameParam : "")
+    
     const setTweetData = useSetRecoilState(dataState);
     const history = useHistory()
 
@@ -100,7 +105,7 @@ const HomePageComponent:React.VFC = () => {
             </ContentStyle>
             <UserName 
                 autoFocus
-                placeholder="ユーザー名を入力" 
+                placeholder={userNameParam ? uname :"ユーザー名を入力" } 
                 onChange={(e)=> setUname(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey){
                     certification()
