@@ -1,5 +1,6 @@
-import proxy from 'http-proxy-middleware';
+// /* eslint-disable import/no-anonymous-default-export */
+// import proxy from 'http-proxy-middleware';
 
-module.exports = function(app) {
-    app.use(proxy("tweets/api", { target: "https://twippy-api.herokuapp.com/", changeOrigin: true, secure: false}));
-};
+// export default function(app) {
+//     app.use(proxy("/api", { target: "https://twippy-api.herokuapp.com/", changeOrigin: true, secure: false}));
+// };

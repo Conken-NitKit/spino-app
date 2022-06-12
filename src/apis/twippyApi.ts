@@ -2,7 +2,7 @@ import axios from "axios";
 import camelcaseKeys from "camelcase-keys";
 
 const twippyAxios = axios.create({
-    baseURL: "https://twippy.netlify.app/"
+    baseURL: "http://localhost:3000"
 })
 
 export const twippyApi = {
